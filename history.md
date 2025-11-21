@@ -1,9 +1,7 @@
 # [OpenCHJ 中納言](https://chunagon.ninjal.ac.jp/open-chj/) 更新履歴
 
 ## ver. 2025.11  
--- [短単位版「関西弁コーパス」ver. 1.0 https://doi.org/10.15084/0002000585](https://doi.org/10.15084/0002000585)
-
-### 収録語数
+-  [短単位版「関西弁コーパス」ver. 1.0 https://doi.org/10.15084/0002000585](https://doi.org/10.15084/0002000585) を追加
 
 
 | サブコーパス名                                       | 短単位数   | 記号を除いた短単位数 |
@@ -13,11 +11,10 @@
 
 ## ver. 2025.03  
 - 最初の公開
--- [源氏物語（渋谷栄一版） ](https://github.com/togiso/OpenCHJ-Genji)
--- [青空文庫（国語教科書所収小説6作品）](https://github.com/togiso/OpenCHJ-Aozora)  
--- [速記叢書講談演説集](https://github.com/togiso/OpenCHJ-Sokkikoudan)  
+--  [源氏物語（渋谷栄一版） ](https://github.com/togiso/OpenCHJ-Genji)
+--  [青空文庫（国語教科書所収小説6作品）](https://github.com/togiso/OpenCHJ-Aozora)  
+--  [速記叢書講談演説集](https://github.com/togiso/OpenCHJ-Sokkikoudan)  
 
-### 収録語数
 
 | サブコーパス名                                       | 短単位数   | 記号を除いた短単位数 |
 |--------------------------------------------------|-------:|---------:|
