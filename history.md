@@ -11,9 +11,9 @@
 
 ## ver. 2025.03  
 - 最初の公開
---  [源氏物語（渋谷栄一版） ](https://github.com/togiso/OpenCHJ-Genji)
---  [青空文庫（国語教科書所収小説6作品）](https://github.com/togiso/OpenCHJ-Aozora)  
---  [速記叢書講談演説集](https://github.com/togiso/OpenCHJ-Sokkikoudan)  
+-- [源氏物語（渋谷栄一版） ](https://github.com/togiso/OpenCHJ-Genji)
+-- [青空文庫（国語教科書所収小説6作品）](https://github.com/togiso/OpenCHJ-Aozora) 
+-- [速記叢書講談演説集](https://github.com/togiso/OpenCHJ-Sokkikoudan) 
 
 
 | サブコーパス名                                       | 短単位数   | 記号を除いた短単位数 |
