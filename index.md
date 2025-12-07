@@ -1,9 +1,7 @@
 # OpenCHJ Project
 
-## Open Corpus of Holistic Japanese
-
-「オープンCHJ」はオープンライセンスのテキストデータにもとづいて構築し、形態論情報もオープンデータとして公開するコーパスです。
-2025年現在、[国立国語研究所](https://www.ninjal.ac.jp/) [「通時コーパス」プロジェクト](https://www.ninjal.ac.jp/research/cr-project/project-4/diachronic-corpus/) が中心になって外部の研究者や日本語研究に関心を持つ方々が、国語研のコーパスと同様に形態論情報を整備して「中納言」で資料を公開することができる「オープンCHJ」の環境整備を進めています。
+「オープンCHJ」（Open Corpus of Holistic Japanese）はオープンライセンスのテキストデータにもとづいて構築し、形態論情報もオープンデータとして公開するコーパスです。
+2025年現在、[国立国語研究所](https://www.ninjal.ac.jp/) [「通時コーパス」プロジェクト](https://www.ninjal.ac.jp/research/cr-project/project-4/diachronic-corpus/) が中心になって、外部の研究者や日本語研究に関心を持つ方々が、国語研のコーパスと同様に形態論情報を整備して[コーパス検索アプリケーション「中納言」](https://chunagon.ninjal.ac.jp/)で資料を公開することができる環境整備を進めています。
 
 ### オープンCHJ講習会（12月19日）
 このたび下記の通りオンラインで「オープンCHJ講習会」を行うことになりました。ご関心のある方はぜひご参加ください。
@@ -13,7 +11,7 @@
 - 申し込み：<https://zoom.us/meeting/register/BRDeVwD_T6uAwBQcMwT3Mg>
   - **事前登録が必要**です。上記のアドレスからお申し込みください。 
 
- [更新履歴](history.md)
+### [更新履歴](history.md)
 - 2025/12/07  「オープンCHJ講習会」（12月19日）の開催を告知しました。
 - 2025/11/21  「短単位版関西弁コーパス」を追加しました。
 
