@@ -10,8 +10,8 @@
 
 - 日時：12月19日　13:30～16:30（終了時間は予定）
 - 場所：オンライン（Zoom）
-- 申し込み：[https://zoom.us/meeting/register/BRDeVwD_T6uAwBQcMwT3Mg](https://zoom.us/meeting/register/BRDeVwD_T6uAwBQcMwT3Mg)
--- 上記のアドレスから**事前登録**が必要です。 
+- 申し込み：<https://zoom.us/meeting/register/BRDeVwD_T6uAwBQcMwT3Mg>
+  - **事前登録が必要**です。上記のアドレスからお申し込みください。 
 
  [更新履歴](history.md)
 - 2025/12/07  「オープンCHJ講習会」（12月19日）の開催を告知しました。
