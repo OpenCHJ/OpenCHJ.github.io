@@ -16,4 +16,4 @@
 - 2025/11/21  「短単位版関西弁コーパス」を追加しました。
 
 ------
-| [OpenCHJリポジトリ](https://github.com/OpenCHJ) | [更新履歴](history.md) | 
+| [更新履歴](history.md) | [OpenCHJリポジトリ](https://github.com/OpenCHJ) | [OpenCHJ中納言](https://chunagon.ninjal.ac.jp/open-chj/) | [「通時コーパス」プロジェクト](https://www.ninjal.ac.jp/research/cr-project/project-4/diachronic-corpus/) |
