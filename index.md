@@ -17,5 +17,4 @@
 - 2025/11/21  「短単位版関西弁コーパス」を追加しました。
 
 ------
-[更新履歴](history.md)
-OpenCHJリポジトリ: [https://github.com/OpenCHJ](https://github.com/OpenCHJ)
+| [OpenCHJリポジトリ](https://github.com/OpenCHJ) | [更新履歴](history.md) | 
