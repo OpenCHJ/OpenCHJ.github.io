@@ -24,10 +24,10 @@
  
      
 ### [更新履歴](history.md)
-- 2025/12/19    [構築中のコーパス](ongoing.md)ページを追加しました。
+- 2025/12/19    [整備中の資料・作品](ongoing.md)ページを追加しました。
 - 2025/12/07    「オープンCHJ講習会」（12月19日）の開催を告知しました。
 - 2025/11/21    「短単位版関西弁コーパス」を追加しました。
 
 ------
-| [更新履歴](history.md) | [構築中のコーパス](ongoing.md) | [語数について](wc.md) | [OpenCHJリポジトリ](https://github.com/OpenCHJ) | [OpenCHJ中納言](https://chunagon.ninjal.ac.jp/open-chj/) | [「通時コーパス」プロジェクト](https://www.ninjal.ac.jp/research/cr-project/project-4/diachronic-corpus/) | [国立国語研究所](https://www.ninjal.ac.jp) |
+| [更新履歴](history.md) | [整備中の資料・作品](ongoing.md) | [語数について](wc.md) | [OpenCHJリポジトリ](https://github.com/OpenCHJ) | [OpenCHJ中納言](https://chunagon.ninjal.ac.jp/open-chj/) | [「通時コーパス」プロジェクト](https://www.ninjal.ac.jp/research/cr-project/project-4/diachronic-corpus/) | [国立国語研究所](https://www.ninjal.ac.jp) |
 
