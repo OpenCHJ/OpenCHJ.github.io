@@ -7,8 +7,9 @@
 
 - 日時：12月19日　13:30～16:30（終了時間は予定）
 - 場所：オンライン（Zoom）
-- 申し込み：<https://zoom.us/meeting/register/BRDeVwD_T6uAwBQcMwT3Mg>
-  - **事前登録が必要**です。上記のアドレスからお申し込みください。
+- 申し込み：**終了しました**<!-- https://zoom.us/meeting/register/BRDeVwD_T6uAwBQcMwT3Mg -->
+  - ~~**事前登録が必要**です。上記のアドレスからお申し込みください。~~
+- **動画を後日YouTubeで公開予定です。****
 
 ### プログラム
  
