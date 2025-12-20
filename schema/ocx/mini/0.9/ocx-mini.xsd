@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://openchj.github.io/ns/ocx"
+           xmlns:ocx="https://openchj.github.io/ns/ocx"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <!-- Root / container -->
+  <xs:element name="doc" type="ocx:docType"/>
+
+  <xs:complexType name="docType" mixed="true">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:choice>
+        <xs:element ref="ocx:eos"/>
+        <xs:element ref="ocx:r"/>
+        <xs:element ref="ocx:note"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="textID" type="xs:string" use="required"/>
+    <xs:attribute name="corpusName" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- End of sentence marker -->
+  <xs:element name="eos">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:restriction base="xs:anyType">
+          <xs:sequence/>
+          <xs:attributeGroup ref="ocx:emptyAttrs"/>
+        </xs:restriction>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Reading annotation -->
+  <xs:element name="r">
+    <xs:complexType mixed="true">
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="rt" type="xs:string" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Note (attribute-only) -->
+  <xs:element name="note">
+    <xs:complexType>
+      <xs:attribute name="text" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Helper: forbid attributes on empty elements if you want stricter control later -->
+  <xs:attributeGroup name="emptyAttrs">
+    <!-- no attributes -->
+  </xs:attributeGroup>
+
+</xs:schema>
