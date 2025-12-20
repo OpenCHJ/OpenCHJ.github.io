@@ -61,11 +61,11 @@
           </content>
         </elementSpec>
 
-        <elementSpec ident="note" ns="https://openchj.github.io/ns/ocx">
-          <desc>Note stored in @text (empty element).</desc>
+        <elementSpec ident="comment" ns="https://openchj.github.io/ns/ocx">
+          <desc>Comment stored in @text (empty element).</desc>
           <attList>
             <attDef ident="text" usage="req">
-              <desc>Note text (not part of analyzable text).</desc>
+              <desc>Commentary text (not part of analyzable text).</desc>
               <datatype><rng:text/></datatype>
             </attDef>
           </attList>
@@ -76,3 +76,4 @@
     </body>
   </text>
 </TEI>
+
