@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:rng="http://relaxng.org/ns/structure/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>OCX mini ODD</title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Draft</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>OCX mini specification</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+
+  <text>
+    <body>
+      <schemaSpec ident="ocx-mini" ns="https://openchj.github.io/ns/ocx">
+
+        <elementSpec ident="doc" ns="https://openchj.github.io/ns/ocx">
+          <desc>OCX mini document container.</desc>
+          <attList>
+            <attDef ident="textID" usage="req">
+              <desc>Text identifier.</desc>
+              <datatype><rng:text/></datatype>
+            </attDef>
+            <attDef ident="corpusName" usage="req">
+              <desc>Corpus name.</desc>
+              <datatype><rng:text/></datatype>
+            </attDef>
+          </attList>
+          <content>
+            <rng:zeroOrMore>
+              <rng:choice>
+                <rng:text/>
+                <rng:ref name="eos"/>
+                <rng:ref name="r"/>
+                <rng:ref name="note"/>
+              </rng:choice>
+            </rng:zeroOrMore>
+          </content>
+        </elementSpec>
+
+        <elementSpec ident="eos" ns="https://openchj.github.io/ns/ocx">
+          <desc>End-of-sentence marker (empty element).</desc>
+          <content><rng:empty/></content>
+        </elementSpec>
+
+        <elementSpec ident="r" ns="https://openchj.github.io/ns/ocx">
+          <desc>Reading annotation. Content is base text; reading is in @rt.</desc>
+          <attList>
+            <attDef ident="rt" usage="req">
+              <desc>Reading (not part of analyzable text).</desc>
+              <datatype><rng:text/></datatype>
+            </attDef>
+          </attList>
+          <content>
+            <rng:text/>
+          </content>
+        </elementSpec>
+
+        <elementSpec ident="note" ns="https://openchj.github.io/ns/ocx">
+          <desc>Note stored in @text (empty element).</desc>
+          <attList>
+            <attDef ident="text" usage="req">
+              <desc>Note text (not part of analyzable text).</desc>
+              <datatype><rng:text/></datatype>
+            </attDef>
+          </attList>
+          <content><rng:empty/></content>
+        </elementSpec>
+
+      </schemaSpec>
+    </body>
+  </text>
+</TEI>
