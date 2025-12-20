@@ -27,7 +27,7 @@ OCX mini は、OpenCHJに収録するために、文学作品・史料・資料�
 
 文書定義ファイルはこちら。
 - XSD: https://openchj.github.io/schema/ocx/mini/1.0/ocx-mini.xsd
-- 
+ 
 
 ## 2. 文書の書き方（2つの使い方）
 
