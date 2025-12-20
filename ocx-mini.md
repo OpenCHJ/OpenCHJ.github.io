@@ -65,11 +65,11 @@ OCX mini は、次の **2通りの形**で使えます。
 
 なお、スキーマを用いてXMLファイルの検証する場合は冒頭のocx:docタグを
 ``` xml
-<ocx:doc textID="八木重吉　貧しき信徒"
-    corpusName="青空文庫"
+<ocx:doc textID="八木重吉　貧しき信徒" corpusName="青空文庫"
     xmlns:ocx="https://openchj.github.io/ns/ocx"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://openchj.github.io/ns/ocx https://openchj.github.io/schema/ocx/mini/1.0/ocx-mini.xsd">
+    xsi:schemaLocation="https://openchj.github.io/ns/ocx
+	https://openchj.github.io/schema/ocx/mini/1.0/ocx-mini.xsd">
 ```
 のようにしてください。
 
