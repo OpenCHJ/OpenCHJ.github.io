@@ -13,7 +13,7 @@
       <xs:choice>
         <xs:element ref="ocx:eos"/>
         <xs:element ref="ocx:r"/>
-        <xs:element ref="ocx:note"/>
+        <xs:element ref="ocx:comment"/>
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="textID" type="xs:string" use="required"/>
@@ -43,8 +43,8 @@
     </xs:complexType>
   </xs:element>
 
-  <!-- Note (attribute-only) -->
-  <xs:element name="note">
+  <!-- Comment (attribute-only) -->
+  <xs:element name="comment">
     <xs:complexType>
       <xs:attribute name="text" type="xs:string" use="required"/>
     </xs:complexType>
