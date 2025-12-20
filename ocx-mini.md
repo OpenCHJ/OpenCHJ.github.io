@@ -16,8 +16,8 @@ OCX mini は、OpenCHJに収録するために、文学作品・史料・資料�
 
 -	[Web茶まめ](https://chamame.ninjal.ac.jp/)で解析しOpenCHJの表形式でデータを出力できる
 -   解析結果を形態論情報データベース[^1]や対応ツール上で（文字オフセットで関連付けて）管理できる
--   メタ情報・ふりがな・コメントなどコーパス本文に不要な情報を解析対象とせず、そのままコーパスとして利用できる
--   XHTMLなどのXML文書にも、プレーンテキストにも同じ方法でアノテーションを追加できる
+-   メタ情報・ふりがな・コメントなど、本文として不要な情報を解析対象とせず、そのままコーパスとして利用できる
+-   XHTMLなどのXML文書にも、プレーンテキストにも、同じ方法でアノテーションを追加できる
 
 [^1]: https://doi.org/10.5715/jnlp.21.301
 
@@ -27,8 +27,7 @@ OCX mini は、OpenCHJに収録するために、文学作品・史料・資料�
 
 文書定義ファイルはこちら。
 - XSD: https://openchj.github.io/schema/ocx/mini/1.0/ocx-mini.xsd
-- ODD: https://openchj.github.io/schema/ocx/mini/1.0/ocx-mini.odd
-
+- 
 
 ## 2. 文書の書き方（2つの使い方）
 
@@ -93,7 +92,7 @@ OCX mini は、次の **2通りの形**で使えます。
 
 ### (B) XHTML (XML) 文書への埋め込み
 
-既存の XHTML（青空文庫HTMLなど）やXML文書のコーパスに取り入れる本文部分（body要素以下）にだけ `<ocx:doc>` を追加する方法です。
+既存の XHTML（青空文庫HTMLなど）やXML文書のうち、コーパスに取り入れる本文部分（body要素以下）にだけ `<ocx:doc>` を追加する方法です。
 
 ``` xml
 <body>
@@ -111,7 +110,9 @@ OCX mini は、次の **2通りの形**で使えます。
 #### サンプル
 - ソース：青空文庫 船中八策（新字新仮名） https://www.aozora.gr.jp/cards/000908/files/4254_16911.html
 
-  - 青空文庫は文字エンコーディングがShift_JISだが、UTF-8で保存し直すことを強く推奨（ `<?xml version="1.0" encoding="Shift_JIS"?>` を削除し、 `<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS" />` を削除ないし無効化しておく。）
+  - 青空文庫は文字エンコーディングがShift_JISだが、UTF-8で保存し直すことを強く推奨[^2]
+
+[^2]: `<?xml version="1.0" encoding="Shift_JIS"?>` を削除し、 `<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS" />` を削除ないし無効化しておく。:
 
 ``` xml
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
