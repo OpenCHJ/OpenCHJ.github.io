@@ -22,9 +22,8 @@ OCX mini は、OpenCHJに収録するために、文学作品・史料・資料�
 
 という利点があります。
 
-文字エンコーディングは UTF-8 を強く推奨します。文字集合はJIS X 0213:2004または JIS X 0208:1990を推奨します。
+テキストファイルの **文字エンコーディングは UTF-8 を強く推奨**します。文字集合はJIS X 0213:2004または JIS X 0208:1990を推奨します。
 
-なお、本文中の半角の空白文字（半角スペース、タブ、改行）は解析時に取り去られます。
 
 ## 2. 文書の書き方（2つの使い方）
 
@@ -64,7 +63,7 @@ OCX mini は、次の **2通りの形**で使えます。
 </ocx:doc>
 ```
 
-なお、XMLファイルの検証する場合は冒頭のocx:docタグを
+なお、スキーマを用いてXMLファイルの検証する場合は冒頭のocx:docタグを
 ``` xml
 <ocx:doc textID="八木重吉　貧しき信徒"
     corpusName="青空文庫"
@@ -83,6 +82,7 @@ OCX mini は、次の **2通りの形**で使えます。
 <body>
   <ocx:doc textID="坂本竜馬 船中八策" corpusName="青空文庫">
    <div> 一、天下の政権を朝廷に奉還せしめ、政令宜しく朝廷より出づべき事。<ocx:eos/><br/></div>
+   <div> 一、上下議政局を設け、議員を置きて万機を参賛せしめ、万機宜しく公議に決すべき事。<ocx:eos/></div>
   </ocx:doc>
 </body>
 ```
@@ -94,7 +94,7 @@ OCX mini は、次の **2通りの形**で使えます。
 #### サンプル
 - ソース：青空文庫 船中八策（新字新仮名） https://www.aozora.gr.jp/cards/000908/files/4254_16911.html
 
-  - 青空文庫は文字エンコーディングがShift_JISだが、UTF-8で保存し直すことを強く推奨（<?xml version="1.0" encoding="Shift_JIS"?>を削除し、<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS" />を削除ないし無効化しておく。）
+  - 青空文庫は文字エンコーディングがShift_JISだが、UTF-8で保存し直すことを強く推奨（ `<?xml version="1.0" encoding="Shift_JIS"?>` を削除し、 `<meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS" />` を削除ないし無効化しておく。）
 
 ``` xml
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
@@ -266,9 +266,9 @@ OCX mini で使う独自タグは **4つだけ**です。
 OCX mini 文書から形態素解析用テキストを作るときは：
 
 1.  `<ocx:doc>` の中の文字だけを集める
-2.  空白や改行は削除する
 3.  `<ocx:eos/>` を **改行1文字**に置き換える
 4.  `<ocx:r>` は中身の文字だけを使う
+2.  半角の空白や改行、タブ文字は削除する （残っていてもいいが解析時には除去される）
 
 これにより、
 
