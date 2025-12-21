@@ -58,7 +58,7 @@ OCX mini は、次の **2通りの形**で使えます。
 
 - ocx mini アノテーション
 ``` xml
-<ocx:doc textID="八木重吉　貧しき信徒" corpusName="青空文庫">
+<ocx:doc textID="八木重吉　貧しき信徒" corpusName="青空文庫" xmlns:ocx="https://openchj.github.io/ns/ocx">
 <ocx:r rt="そぼく">素朴</ocx:r>な<ocx:r rt="こと">琴</ocx:r><ocx:eos/>
 この明るさのなかへ
 ひとつの素朴な琴をおけば
