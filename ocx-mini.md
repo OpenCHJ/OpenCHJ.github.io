@@ -47,6 +47,7 @@ OCX mini は、次の **2通りの形**で使えます。
 
 #### サンプル
 - ソース
+
 ``` txt
 素朴《そぼく》な琴《こと》
 この明るさのなかへ
@@ -56,6 +57,7 @@ OCX mini は、次の **2通りの形**で使えます。
 ```
 
 - ocx mini アノテーション
+
 ``` xml
 <ocx:doc textID="八木重吉　貧しき信徒" corpusName="青空文庫" xmlns:ocx="https://openchj.github.io/ns/ocx">
 <ocx:r rt="そぼく">素朴</ocx:r>な<ocx:r rt="こと">琴</ocx:r><ocx:eos/>
@@ -69,6 +71,7 @@ OCX mini は、次の **2通りの形**で使えます。
 テキストデータをアノテーションする際は、次のようにデフォルト名前空間を`https://openchj.github.io/ns/ocx`とすることでタグの名前空間接頭辞（`ocx:`）を省略できます。
 
 - ocx mini アノテーション（デフォルト名前空間）
+
 ``` xml
 <doc textID="八木重吉　貧しき信徒" corpusName="青空文庫" xmlns="https://openchj.github.io/ns/ocx">
 <r rt="そぼく">素朴</r>な<r rt="こと">琴</r><eos/>
@@ -80,6 +83,7 @@ OCX mini は、次の **2通りの形**で使えます。
 ```
 
 スキーマを用いてファイルを検証する場合は冒頭のocx:docタグに下記のようにスキーマロケーションを指定します。
+
 ``` xml
 <ocx:doc textID="八木重吉　貧しき信徒" corpusName="青空文庫"
     xmlns:ocx="https://openchj.github.io/ns/ocx"
@@ -180,7 +184,6 @@ OCX mini は、次の **2通りの形**で使えます。
 </div>
 </body>
 </html>
-
 ```
 
 ## 3. OCX mini の基本原則（重要）
