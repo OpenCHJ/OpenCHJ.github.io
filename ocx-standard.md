@@ -25,7 +25,7 @@
 
 ## 1. 目的と位置づけ
 
-**OCX (Open Corpus eXtension)** は、日本語テキストを中心とする人文系資料を対象に、次を同時に満たすことを目的とした XML 規格です。
+**OCX (Open CHJ XML)** は、日本語テキストを中心とする人文系資料を対象に、次を同時に満たすことを目的とした XML 規格です。
 
 - 形態素解析・構文解析などの言語解析に適したテキスト表現
 - 文字オフセット（character offsets）に基づく解析結果管理
@@ -109,7 +109,8 @@ OCX Standard で使用を許可する TEI 要素は以下に限定します。
 
 ### 5.1 制約
 
-- `tei:note` は使用しません（注記は `ocx:comment` を使用）。
+- `tei:note` は使用しません（注記は `ocx:comment` を使用し、本文に注釈が入り込むのを避ける）。
+- `tei:ruby` は使用しません（ルビは `ocx:r` を使用し、本文に振り仮名が入り込むのを避ける）。
 - `tei:quote` は **ブロック引用**として用い、`tei:s` の内部には置きません。
 - `tei:sp` は会話（発話範囲）を表すために用います。
 - `tei:speaker` は **原文に明示的な話者表示がある場合のみ**用います。
@@ -171,9 +172,9 @@ OCX mini 由来の `ocx:eos`（空要素）を、文境界表示のオプショ�
 
 ## 9. 解析制御
 
-OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
+OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表します。
 
-### 9.1 `ocx:proc`（通常解析範囲）
+### 9.1 `ocx:proc`（解析範囲の特殊処理）
 
 ```xml
 <ocx:proc dic="Kindai-bungo" norm="kata2hira">…</ocx:proc>
@@ -181,8 +182,8 @@ OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
 
 | 属性 | 必須 | 内容 |
 |---|---|---|
-| `dic` | 任意 | 辞書指定（例: `Kindai-bungo`, `Kansai`） |
-| `norm` | 任意 | 正規化規則（v0.5: `kata2hira`） |
+| `dic` | 任意 | 形態素解析に用いる辞書を指定します。（例: `Kindai-bungo`, `Kansai`） |
+| `norm` | 任意 | 正規化規則を適用します。（v0.5: `kata2hira`） |
 
 **処理順**
 1. `norm` を適用（指定がある場合）
@@ -190,9 +191,13 @@ OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
 
 `dic` 制限語彙（v0.5）
 
-- `Kindai-bungo`（近代文語UniDicで解析）
-- `Chuko-wabun`（中古和文UniDicで解析）
-- `Kansai`（関西方言UniDicで解析）
+- `Kindai-bungo`　近代文語UniDicで解析
+- `Chuko-wabun`　中古和文UniDicで解析
+- `Kansai`　関西方言UniDicで解析
+
+`norm` 制限語彙（v0.5）
+
+- `kata2hira`　カタカナをひらがなに置き換えてから解析
 
   
 ### 9.2 `ocx:skip`（解析対象外範囲）
