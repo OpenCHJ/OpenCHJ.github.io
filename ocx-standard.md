@@ -52,7 +52,7 @@
 
 ```xml
 xmlns:ocx="https://openchj.github.io/ns/ocx"
-xmlns:tei="http://www.tei-c.org/ns/1.0"
+xmlns:tei="http://www.tei-c.org/ns/0.5"
 ```
 
 ### 3.2 接頭辞の運用方針（重要）
@@ -85,7 +85,7 @@ xmlns:tei="http://www.tei-c.org/ns/1.0"
 ```xml
 <ocx:doc textID="作品ID" corpusName="コーパス名"
          xmlns:ocx="https://openchj.github.io/ns/ocx"
-         xmlns:tei="http://www.tei-c.org/ns/1.0">
+         xmlns:tei="http://www.tei-c.org/ns/0.5">
   <tei:body>
     <tei:p>
       <tei:s>これは文です。</tei:s>
@@ -182,12 +182,19 @@ OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
 | 属性 | 必須 | 内容 |
 |---|---|---|
 | `dic` | 任意 | 辞書指定（例: `Kindai-bungo`, `Kansai`） |
-| `norm` | 任意 | 正規化規則（v1.0: `kata2hira`） |
+| `norm` | 任意 | 正規化規則（v0.5: `kata2hira`） |
 
 **処理順**
 1. `norm` を適用（指定がある場合）
 2. `dic` 指定（なければ既定辞書）で通常解析
 
+`dic` 制限語彙（v0.5）
+
+- `Kindai-bungo`（近代文語UniDicで解析）
+- `Chuko-wabun`（中古和文UniDicで解析）
+- `Kansai`（関西方言UniDicで解析）
+
+  
 ### 9.2 `ocx:skip`（解析対象外範囲）
 
 ```xml
@@ -199,7 +206,7 @@ OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
 | `tokenize` | ○ | `single` / `space` |
 | `pos` | ○ | 制限語彙（下記） |
 
-`pos` 制限語彙（v1.0）
+`pos` 制限語彙（v0.5）
 
 - `kanbun`（漢文）
 - `foreign`（外国語）
@@ -229,7 +236,7 @@ OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
 |---|---|---|
 | `orig` | ○ | 原表記の踊り字記号（制限語彙） |
 
-`orig` 制限語彙（v1.0）:
+`orig` 制限語彙（v0.5）:
 `ゝ` `ゞ` `ヽ` `ヾ` `々` `〳〵` `〱` `〲`
 
 解析入力生成では、`ocx:odoriji` の **要素内容のみ**を出力し、`@orig` は保持情報（解析対象外）とします。
@@ -240,7 +247,7 @@ OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
 
 ### 11.1 `ocx:warigaki`（構造要素）
 
-割書を表す構造要素です。v1.0 では属性を持ちません。
+割書を表す構造要素です。v0.5 では属性を持ちません。
 
 ```xml
 <ocx:warigaki>割書本文</ocx:warigaki>
@@ -265,7 +272,7 @@ OCX Standard は、解析制御を **2種類の範囲タグ**で表します。
 ```
 
 - `ocx:wbr` は **`ocx:warigaki` 内のみ**で使用します。
-- 解析入力生成では `ocx:wbr` を **空白 1 個**に正規化します。
+- 解析入力生成では `ocx:wbr` は除去されます。
 
 ---
 
@@ -320,7 +327,7 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 - `ocx:doc` ルート、必須属性 `textID`, `corpusName`
 - OCX 要素は常に `ocx:` 接頭辞付きで記述
 - `ocx:skip` の `@tokenize` は `single|space` のいずれか
-- `ocx:skip` の `@pos` は v1.0 制限語彙のいずれか
+- `ocx:skip` の `@pos` は v0.5 制限語彙のいずれか
 - `ocx:odoriji@orig` は制限語彙のいずれか
 - `ocx:wbr` は `ocx:warigaki` 内にのみ出現
 - `ocx:eos` は `tei:s` 内に出現しない
@@ -331,6 +338,7 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 ## 15. 互換性と拡張
 
 - `pos` 値の追加
+- `dic` 値の追加
 - `norm` 規則の追加
 - TEI サブセットの拡張
 
