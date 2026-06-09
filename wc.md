@@ -16,4 +16,4 @@
 
 ------
 
-|[TOP](index.md)| [更新履歴](history.md) | [整備中の資料・作品](ongoing.md) | [語数について](wc.md) |
+| [TOP](index.md) | [更新履歴](history.md) | [整備中の資料・作品](ongoing.md) | [語数について](wc.md) |
