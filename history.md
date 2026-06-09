@@ -2,7 +2,7 @@
 
 ------
 
-## ver. 2025.5
+## ver. 2026.5
 虎寛本狂言集・上代歌謡（仏足石歌・歌経標式例歌）・青空文庫所収小説等13作品を追加
 
 - [虎寛本狂言集 /チーム瑞京](https://github.com/yuho-k/OpenCHJ-Torahiro) https://github.com/yuho-k/OpenCHJ-Torahiro
