@@ -4,8 +4,8 @@ OpenCHJのための二つのXML文書定義を策定しています（ドラフ�
 
 ### [OCX-mini](ocx-mini.md)
 
-- https://openchj.github.io/ocx-mini
+- [https://openchj.github.io/ocx-mini](https://openchj.github.io/ocx-mini)
 
 ### [OCX-standard](ocx-standard.md)
 
-- https://openchj.github.io/ocx-standard
+- [https://openchj.github.io/ocx-standard](https://openchj.github.io/ocx-standard)
