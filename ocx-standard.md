@@ -248,7 +248,7 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 | `orig` | ○ | 原表記の踊り字記号（制限語彙） |
 
 `orig` 制限語彙（v0.6）:
-`ゝ` `ゞ` `ヽ` `ヾ` `々` `〳〵` `〱` `〲`
+`ゝ` `ゞ` `ヽ` `ヾ` `〻` `々` `〳〵` `〱` `〲`
 
 解析入力生成では、`ocx:odoriji` の **要素内容のみ**を出力し、`@orig` は保持情報（解析対象外）とします。
 
@@ -258,7 +258,7 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 ### 11.1 `ocx:warigaki`（構造要素）
 
-割書を表す構造要素です。v0.5 では属性を持ちません。
+割書を表す構造要素です。属性を持ちません。
 
 ```xml
 <ocx:warigaki>割書本文</ocx:warigaki>
@@ -338,7 +338,8 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 例:
 
 ```xml
-<tei:s>智に<ocx:corr orig="動" type="誤字">働</ocx:corr>けば角が立つ。情に<ocx:corr orig="竿">棹</ocx:corr>させば流される。意地を通せば<ocx:corr orig="ば" type="衍字"/>窮屈だ。とかく<ocx:corr orig="" type="脱字">に</ocx:corr>人の世は住みにくい。</tei:s>
+<tei:s>智に<ocx:corr orig="動" type="誤字">働</ocx:corr>けば角が立つ。情に<ocx:corr orig="竿">棹</ocx:corr>させば流される。
+意地を通せば<ocx:corr orig="ば" type="衍字"/>窮屈だ。とかく<ocx:corr orig="" type="脱字">に</ocx:corr>人の世は住みにくい。</tei:s>
 ```
 
 解析入力生成では、`ocx:corr` の **要素内容のみ**を出力し、`@orig` は保持情報（解析対象外）とします。
