@@ -509,7 +509,6 @@ TEI 文書は `tei:TEI` > `tei:teiHeader` + `tei:text` > `tei:front` / `tei:body
 
 - **外字 `tei:g`**: TEI では `<tei:g ref="#gaiji01"/>` のような空要素も使えますが、OCX では代替文字（見当たらない場合は `〓`）を要素内容として必ず記述します（[5.2](#52-使用しない-tei-要素と制約)）。
 - **外国語 `tei:foreign`**: TEI で外国語を示しても、OCX では形態素解析の対象のままです。形態素解析を行わない場合は `ocx:skip` で囲みます。
-- **会話と話者表示**: TEI の `tei:sp` は主に戯曲の台詞のための要素で、`tei:sp` の直下には `tei:p` や `tei:ab` などを置きます（`tei:s` を直接は置けません）。散文中の会話には `tei:said` や `tei:q` が用いられます。いずれの場合も、OCX では `tei:speaker` などの要素内容は解析対象です。話者表示を解析から除きたい場合は、本文に書かずに `@who` などの属性値に記録します。
 
 ### C.5 TEI への変換の目安
 
@@ -533,4 +532,4 @@ TEI 文書は `tei:TEI` > `tei:teiHeader` + `tei:text` > `tei:front` / `tei:body
 OCX 文書の `tei:*` 部分を TEI のスキーマで検証する場合は、ODD で次のカスタマイズを行います。
 
 - `https://openchj.github.io/ns/ocx` 名前空間の要素を、TEI 要素の内容として許可する
-- `tei:sp@who` などで任意の文字列を値として許可する（OCX の `@who` の扱いに合わせる場合）
+- `@who` で任意の文字列を値として許可する（OCX の `@who` の扱いに合わせる場合）
