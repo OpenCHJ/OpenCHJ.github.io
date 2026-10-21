@@ -9,19 +9,19 @@
 - [4. 文書構造](#4-文書構造)
 - [5. TEI 語彙の利用](#5-tei-語彙の利用)
 - [6. 文境界](#6-文境界)
-- [7. 会話（speech）](#7-会話speech)
-- [8. 割書（warigaki）](#8-割書warigaki)
-- [9. ルビ（フリガナ）](#9-ルビフリガナ)
-- [10. 踊り字（odoriji）](#10-踊り字odoriji)
-- [11. 濁点付与（vMark）](#11-濁点付与vmark)
-- [12. 誤字・脱字・衍字（corr）](#12-誤字脱字衍字corr)
-- [13. 注記](#13-注記)
-- [14. 解析制御](#14-解析制御)
-- [15. 解析入力生成規則（要約）](#15-解析入力生成規則要約)
-- [16. 適合性（Conformance）](#16-適合性conformance)
-- [17. 互換性と拡張](#17-互換性と拡張)
+- [7. 割書（warigaki）](#7-割書warigaki)
+- [8. ルビ（フリガナ）](#8-ルビフリガナ)
+- [9. 踊り字（odoriji）](#9-踊り字odoriji)
+- [10. 濁点付与（vMark）](#10-濁点付与vmark)
+- [11. 誤字・脱字・衍字（corr）](#11-誤字脱字衍字corr)
+- [12. 注記](#12-注記)
+- [13. 解析制御](#13-解析制御)
+- [14. 解析入力生成規則（要約）](#14-解析入力生成規則要約)
+- [15. 適合性（Conformance）](#15-適合性conformance)
+- [16. 互換性と拡張](#16-互換性と拡張)
 - [付録 A: 用語](#付録-a-用語)
 - [付録 B: 実装者向けメモ](#付録-b-実装者向けメモ)
+- [付録 C: TEI ガイドラインとの対応と相違点](#付録-c-tei-ガイドラインとの対応と相違点)
 
 ---
 
@@ -34,7 +34,7 @@
 - 原文表記（割書・ルビ・踊り字等）の保持
 
 **OCX Standard** は、OCX mini（最小マークアップ）を包含しつつ、TEI 語彙を利用し、OCX 独自語彙で解析制御を明示します。  
-本規格は **TEI 文書そのものではありません**（TEI の語彙を借用しつつ、解析用途に最適化します）。
+本規格は **TEI 文書そのものではありません**（TEI の語彙を借用しつつ、解析用途に最適化します）。TEI ガイドラインとの対応と相違点は [付録 C](#付録-c-tei-ガイドラインとの対応と相違点) にまとめています。
 
 ### 1.1 OCX mini との関係
 
@@ -48,7 +48,7 @@ OCX mini の要素（`ocx:doc`, `ocx:eos`, `ocx:r`, `ocx:comment`）は、OCX St
 ## 2. 基本原則
 
 1. 本文に含まれる文字は、原則としてすべて解析対象とします。  
-2. 形態素解析を行わない範囲（解析対象外）は、**`ocx:skip`** によって明示します。解析対象外の範囲も本文文字列としては残り、規則による擬似トークン化で短単位と品詞（`pos`）が与えられます（[14.2](#142-ocxskip解析対象外範囲)）。  
+2. 形態素解析を行わない範囲（解析対象外）は、**`ocx:skip`** によって明示します。解析対象外の範囲も本文文字列としては残り、規則による擬似トークン化で短単位と品詞（`pos`）が与えられます（[13.2](#132-ocxskip解析対象外範囲)）。  
 3. 原文表記（ルビ・踊り字など）や注記の情報は、属性値として本文文字列と分離して保持します。属性値は解析用テキストに含めません。  
 4. XML 要素の交差を避け、実装可能性を優先します。  
 5. 名前空間は OCX / TEI ともに接頭辞付きで記述し、**OCX 要素は常に `ocx:` 接頭辞**で識別できるようにします。
@@ -125,7 +125,7 @@ xmlns:tei="http://www.tei-c.org/ns/1.0"
 
 ## 5. TEI 語彙の利用
 
-OCX Standard は TEI 語彙を **閉じたサブセットとしては限定しません**。OCX の原則（[2章](#2-基本原則)：本文中の文字は原則としてすべて解析対象となり、読み・注記などを本文文字列に混ぜない）を破らない TEI 要素は使用できます。
+OCX Standard は TEI 語彙を **閉じたサブセットとしては限定しません**。OCX の原則（[2章](#2-基本原則)：本文中の文字は原則としてすべて解析対象となり、読み・注記などを本文文字列に混ぜない）を破らない TEI 要素は使用できます。TEI ガイドラインとの相違点は [付録 C](#付録-c-tei-ガイドラインとの対応と相違点) を参照してください。
 
 ### 5.1 よく用いる TEI 要素
 
@@ -133,12 +133,15 @@ OCX Standard は TEI 語彙を **閉じたサブセットとしては限定し�
 
 - `tei:front`, `tei:body`, `tei:back`
 - `tei:div`, `tei:p`, `tei:s`
-- `tei:sp`, `tei:speaker`
+- `tei:head`
+- `tei:sp`, `tei:speaker`, `tei:said`
 - `tei:quote`, `tei:q`
-- `tei:title`
 - `tei:pb`, `tei:lb`, `tei:g`
 
 このうち OCX Standard が解析上の意味を与えるのは `tei:s`（文境界、[6章](#6-文境界)）のみです。その他の TEI 要素は、上記の一覧にないものも含め、解析入力生成ではタグを無視し、要素内容の文字列を通常の本文として扱います。
+
+- `tei:speaker`（話者表示）や `tei:head`（見出し）の文字列も解析対象です。解析から除きたい情報は、本文に書かずに属性値（例: `tei:sp@who`）に記録します。
+- `tei:foreign` などで外国語であることを示しても、形態素解析の対象のままです。形態素解析を行わない場合は `ocx:skip`（`pos="foreign"`）で囲みます（[13.2](#132-ocxskip解析対象外範囲)）。
 
 ### 5.2 使用しない TEI 要素と制約
 
@@ -150,8 +153,13 @@ OCX Standard は TEI 語彙を **閉じたサブセットとしては限定し�
 
 その他の制約:
 
-- `tei:quote` は **ブロック引用**として用い、`tei:s` の内部には置きません。
-- `tei:sp`, `tei:speaker` の使い方は [7章](#7-会話speech) を参照してください。
+- `tei:quote` は **ブロック引用**として用い、`tei:s` の内部には置きません（文中の引用には `tei:q` を用います）。
+- `tei:g`（外字）には、代替文字を **要素内容として必ず** 記述します。空の `tei:g` は解析用テキストに文字が残らず、文字オフセットがずれる原因になります。適当な代替文字が見当たらない場合は、`〓`（げた記号）を用います。
+
+```xml
+<tei:g ref="#gaiji01">吉</tei:g>
+<tei:g ref="#gaiji02">〓</tei:g>
+```
 
 ---
 
@@ -183,47 +191,9 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 ---
 
-## 7. 会話（speech）
+## 7. 割書（warigaki）
 
-### 7.1 `tei:sp`（発話範囲）
-
-会話の範囲（台詞・発話）を TEI の `tei:sp` で表します。
-
-- 話者識別のため `tei:sp@who` を推奨します。OCX Standard では `@who` に任意の文字列（話者 ID や話者名）を記述できます（TEI では `@who` は `#A` のような URI 参照ですが、OCX では URI 参照に限定しません）。
-- 原文に話者名が明示されている場合のみ `tei:speaker` を用います。
-- `tei:speaker` の要素内容は本文の一部であり、他の本文と同様に解析対象となります。
-- 原文の話者表示を本文から除きたい場合は、`tei:speaker` を用いずに話者名を `tei:sp@who` の属性値に記録します。属性値は解析用テキストに含まれないため、話者表示は解析入力から除かれます。
-
-例（話者識別のみ）:
-
-```xml
-<tei:sp who="A">
-  <tei:s>あの泥坊が羨しい。</tei:s>
-</tei:sp>
-```
-
-例（原文に話者表示があり、本文として残す場合）:
-
-```xml
-<tei:sp who="A">
-  <tei:speaker>男</tei:speaker>
-  <tei:s>あの泥坊が羨しい。</tei:s>
-</tei:sp>
-```
-
-例（原文の話者表示「男」を本文から除き、属性値に回す場合）:
-
-```xml
-<tei:sp who="男">
-  <tei:s>あの泥坊が羨しい。</tei:s>
-</tei:sp>
-```
-
----
-
-## 8. 割書（warigaki）
-
-### 8.1 `ocx:warigaki`（構造要素）
+### 7.1 `ocx:warigaki`（構造要素）
 
 割書を表す構造要素です。属性を持ちません。
 
@@ -231,9 +201,9 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 <ocx:warigaki>割書本文</ocx:warigaki>
 ```
 
-### 8.2 解析制御（推奨）: `ocx:skip` を外側に付与
+### 7.2 解析制御（推奨）: `ocx:skip` を外側に付与
 
-割書の解析上の扱いを変える場合、外側に `ocx:skip`（[14.2](#142-ocxskip解析対象外範囲)）を付与します（`ocx:skip` が親、`ocx:warigaki` が子）。
+割書の解析上の扱いを変える場合、外側に `ocx:skip`（[13.2](#132-ocxskip解析対象外範囲)）を付与します（`ocx:skip` が親、`ocx:warigaki` が子）。
 
 ```xml
 <ocx:skip tokenize="single" pos="other">
@@ -241,7 +211,7 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 </ocx:skip>
 ```
 
-### 8.3 割書内改行: `ocx:wbr`（空要素）
+### 7.3 割書内改行: `ocx:wbr`（空要素）
 
 原文で割書の内部に改行がある場合、`tei:lb` ではなく `ocx:wbr` を用います。
 
@@ -254,9 +224,9 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 ---
 
-## 9. ルビ（フリガナ）
+## 8. ルビ（フリガナ）
 
-### 9.1 `ocx:r`
+### 8.1 `ocx:r`
 
 ```xml
 <ocx:r rt="よみ">表記</ocx:r>
@@ -278,9 +248,9 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 ---
 
-## 10. 踊り字（odoriji）
+## 9. 踊り字（odoriji）
 
-### 10.1 `ocx:odoriji`
+### 9.1 `ocx:odoriji`
 
 踊り字（ゝゞヽヾ々〳〵 等）を、対応する文字へ展開した上で、原表記を保持します。
 
@@ -300,13 +270,13 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 `々` について: 解析処理では `々` を自動展開しません（`人々` は `人々` のまま解析されます）。`ocx:odoriji` で展開した記述（上の `人<ocx:odoriji orig="々">人</ocx:odoriji>`）も許容します。
 
-踊り字の展開に濁点の補いを伴う場合は、`ocx:odoriji` を外側、`ocx:vMark` を内側にします（[11章](#11-濁点付与vmark)）。
+踊り字の展開に濁点の補いを伴う場合は、`ocx:odoriji` を外側、`ocx:vMark` を内側にします（[10章](#10-濁点付与vmark)）。
 
 ---
 
-## 11. 濁点付与（vMark）
+## 10. 濁点付与（vMark）
 
-### 11.1 `ocx:vMark`（濁点）
+### 10.1 `ocx:vMark`（濁点）
 
 原文に付与されていなかった濁点を補った場合、濁点を補った文字を `ocx:vMark` で括って表します。要素内容は **1 文字**です（複数の文字に濁点を補う場合は、1 文字ずつ `ocx:vMark` で括ります）。原表記は、要素内容から濁点を除いた文字です。
 
@@ -318,7 +288,7 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 解析入力生成では、`ocx:vMark` の **要素内容（濁点を補った文字）**を出力します。
 
-### 11.2 踊り字との組み合わせ
+### 10.2 踊り字との組み合わせ
 
 踊り字の展開に濁点の補いを伴う場合は、`ocx:odoriji` を外側、`ocx:vMark` を内側にします（逆の入れ子は用いません）。
 
@@ -330,9 +300,9 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 ---
 
-## 12. 誤字・脱字・衍字（corr）
+## 11. 誤字・脱字・衍字（corr）
 
-### 12.1 `ocx:corr`（誤字・脱字・衍字の修正）
+### 11.1 `ocx:corr`（誤字・脱字・衍字の修正）
 
 原文に対する修正を `ocx:corr` で表し、修正後の文字を要素内容とします。修正前の文字は `ocx:corr@orig` に保存します。
 
@@ -358,9 +328,9 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 ---
 
-## 13. 注記
+## 12. 注記
 
-### 13.1 `ocx:comment`（空要素）
+### 12.1 `ocx:comment`（空要素）
 
 ```xml
 <ocx:comment text="注記内容"/>
@@ -371,11 +341,11 @@ OCX mini 由来の `ocx:eos`（空要素）も文境界の表示として使用�
 
 ---
 
-## 14. 解析制御
+## 13. 解析制御
 
 OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表します。
 
-### 14.1 `ocx:proc`（解析範囲の特殊処理）
+### 13.1 `ocx:proc`（解析範囲の特殊処理）
 
 ```xml
 <ocx:proc dic="Kindai-bungo" norm="kata2hira">…</ocx:proc>
@@ -400,7 +370,7 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 - `kata2hira`　カタカナをひらがなに置き換えてから解析
 
-### 14.2 `ocx:skip`（解析対象外範囲）
+### 13.2 `ocx:skip`（解析対象外範囲）
 
 ```xml
 <ocx:skip tokenize="single" pos="uri">https://example.org</ocx:skip>
@@ -426,14 +396,14 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 ---
 
-## 15. 解析入力生成規則（要約）
+## 14. 解析入力生成規則（要約）
 
 - 対象範囲 → `ocx:doc` の内部のみ
 - `tei:s` の終端 → 文境界（改行 1 文字）
 - `ocx:eos` → 文境界（改行 1 文字）
 - 原文データ中の改行 → 除去（改行が残るのは文境界のみ）
 - 全角スペース → 本文文字として保持
-- `tei:sp`, `tei:speaker` などの TEI 要素・埋め込み先の要素 → タグを無視し、要素内容を通常の本文として出力
+- TEI 要素・埋め込み先の要素（`tei:speaker`, `tei:head`, `tei:g` などを含む） → タグを無視し、要素内容を通常の本文として出力
 - `ocx:warigaki` → 要素内容を通常の本文として出力
 - `ocx:wbr` → 除去
 - `ocx:r` → 要素内容のみ出力（`@rt`, `@lrt` は除外）
@@ -447,9 +417,9 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 ---
 
-## 16. 適合性（Conformance）
+## 15. 適合性（Conformance）
 
-### 16.1 OCX Standard 準拠文書
+### 15.1 OCX Standard 準拠文書
 
 OCX Standard 準拠と主張する文書は、少なくとも次を満たす必要があります。
 
@@ -458,6 +428,7 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 - 文境界を `tei:s` または `ocx:eos` で示す
 - [5.2](#52-使用しない-tei-要素と制約) で使用しないとした TEI 要素（`tei:note`, `tei:ruby`, `tei:choice`）を用いない
 - `tei:quote` は `tei:s` 内に出現しない
+- `tei:g` は要素内容（代替文字）を持つ
 - `ocx:eos` は `tei:s` 内に出現しない
 - `ocx:wbr` は `ocx:warigaki` 内にのみ出現
 - `ocx:r` は `@rt` と `@lrt` の少なくとも一方を持つ
@@ -469,11 +440,9 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 - `ocx:skip` の `@tokenize` は `single|space` のいずれか
 - `ocx:skip` の `@pos` は制限語彙のいずれか
 
-なお、`tei:speaker` を原文に話者表示がある場合のみ用いること（[7章](#7-会話speech)）は作業上の指針であり、機械的な検証の対象ではありません。
-
 ---
 
-## 17. 互換性と拡張
+## 16. 互換性と拡張
 
 - `dic` 値の追加
 - `norm` 規則の追加
@@ -502,3 +471,66 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 - XSD（検証用）
 
 TEI 要素は閉じたサブセットとして限定しないため（[5章](#5-tei-語彙の利用)）、スキーマでは OCX 要素を厳密に検証し、TEI 要素は緩やかに（lax に）許容することを想定します。
+
+TEI のスキーマ（TEI All など）で検証する場合、`ocx:*` 要素は TEI の名前空間外の要素としてエラーになります。ODD で `https://openchj.github.io/ns/ocx` 名前空間の要素を許可するカスタマイズが必要です（[付録 C.6](#c6-tei-スキーマで検証する場合)）。
+
+---
+
+## 付録 C: TEI ガイドラインとの対応と相違点
+
+この付録は、TEI に慣れた利用者や、OCX 文書を TEI 文書に変換する実装者のための参考情報です（規範ではありません）。
+
+### C.1 文書構造
+
+TEI 文書は `tei:TEI` > `tei:teiHeader` + `tei:text` > `tei:front` / `tei:body` / `tei:back` という構造をとります。OCX では `ocx:doc` がルートとなり、その直下に `tei:body` などを置きます。`teiHeader` に相当する書誌情報は OCX の対象外で、`ocx:doc` の `@textID`, `@corpusName` のみを持ちます。
+
+| OCX | TEI |
+|---|---|
+| `ocx:doc` | `tei:TEI` / `tei:text` |
+| `ocx:doc@textID` | `tei:TEI@xml:id` または `tei:idno` |
+
+### C.2 使用しない TEI 要素と代わりの OCX 要素
+
+| TEI | OCX | 理由 |
+|---|---|---|
+| `tei:note` | `ocx:comment` | 注記の文字列を本文に入れないため |
+| `tei:ruby` / `tei:rb` / `tei:rt` | `ocx:r` | ふりがなの文字列を本文に入れないため |
+| `tei:choice` + `tei:sic` / `tei:corr` | `ocx:corr` | 本文を解析対象となる一つにしぼるため |
+| `tei:choice` + `tei:orig` / `tei:reg` | `ocx:odoriji`, `ocx:vMark` | 同上 |
+
+### C.3 意味がずれる点・名前が重なる点
+
+- **`tei:quote`**: TEI では「他の資料からの引用」を表し、ブロックか文中かは区別しません。OCX ではブロック引用に限り、文中の引用には `tei:q` を用います。
+- **`@who`**: TEI では `#A` のような URI 参照（`tei:particDesc` の人物などを指す）ですが、OCX では話者名などの任意の文字列を認めます。
+- **`ocx:corr` と `tei:corr`**: `tei:corr` は `tei:choice` の中で訂正後の文字列を示す要素ですが、`ocx:corr` は単独で用い、訂正前の文字列を `@orig` に持ちます。
+- **`@orig` と `tei:orig`**: OCX の `@orig` 属性（原表記）は、TEI の `tei:orig` 要素とは別のものです。
+
+### C.4 TEI の書き方と OCX での扱いが異なる点
+
+- **外字 `tei:g`**: TEI では `<tei:g ref="#gaiji01"/>` のような空要素も使えますが、OCX では代替文字（見当たらない場合は `〓`）を要素内容として必ず記述します（[5.2](#52-使用しない-tei-要素と制約)）。
+- **外国語 `tei:foreign`**: TEI で外国語を示しても、OCX では形態素解析の対象のままです。形態素解析を行わない場合は `ocx:skip` で囲みます。
+- **会話と話者表示**: TEI の `tei:sp` は主に戯曲の台詞のための要素で、`tei:sp` の直下には `tei:p` や `tei:ab` などを置きます（`tei:s` を直接は置けません）。散文中の会話には `tei:said` や `tei:q` が用いられます。いずれの場合も、OCX では `tei:speaker` などの要素内容は解析対象です。話者表示を解析から除きたい場合は、本文に書かずに `@who` などの属性値に記録します。
+
+### C.5 TEI への変換の目安
+
+| OCX | TEI での表現例 |
+|---|---|
+| `<ocx:r rt="よみ">表記</ocx:r>` | `<tei:ruby><tei:rb>表記</tei:rb><tei:rt>よみ</tei:rt></tei:ruby>` |
+| `<ocx:r lrt="いみ">表記</ocx:r>` | `<tei:ruby><tei:rb>表記</tei:rb><tei:rt place="left">いみ</tei:rt></tei:ruby>` |
+| `<ocx:comment text="注記"/>` | `<tei:note>注記</tei:note>` |
+| `<ocx:corr orig="動">働</ocx:corr>`（誤字） | `<tei:choice><tei:sic>動</tei:sic><tei:corr>働</tei:corr></tei:choice>` |
+| `<ocx:corr orig="ば"/>`（衍字） | `<tei:surplus>ば</tei:surplus>` |
+| `<ocx:corr orig="">に</ocx:corr>`（脱字） | `<tei:supplied reason="omitted">に</tei:supplied>` |
+| `<ocx:odoriji orig="ゝ">こ</ocx:odoriji>` | `<tei:choice><tei:orig>ゝ</tei:orig><tei:reg>こ</tei:reg></tei:choice>` |
+| `<ocx:vMark>ば</ocx:vMark>` | `<tei:choice><tei:orig>は</tei:orig><tei:reg>ば</tei:reg></tei:choice>` |
+| `<ocx:warigaki>…</ocx:warigaki>` | `<tei:seg type="warigaki">…</tei:seg>` など |
+| `<ocx:wbr/>` | `<tei:lb/>` |
+| `<ocx:eos/>` | `tei:s` による文の括り |
+| `ocx:proc`, `ocx:skip` | 対応する TEI 要素なし（`ocx:skip pos="foreign"` は `tei:foreign` に近い） |
+
+### C.6 TEI スキーマで検証する場合
+
+OCX 文書の `tei:*` 部分を TEI のスキーマで検証する場合は、ODD で次のカスタマイズを行います。
+
+- `https://openchj.github.io/ns/ocx` 名前空間の要素を、TEI 要素の内容として許可する
+- `tei:sp@who` などで任意の文字列を値として許可する（OCX の `@who` の扱いに合わせる場合）
