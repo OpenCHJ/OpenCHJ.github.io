@@ -15,9 +15,11 @@
 - [10. 踊り字（odoriji）](#10-踊り字odoriji)
 - [11. 割書（warigaki）](#11-割書warigaki)
 - [12. 会話（speech）](#12-会話speech)
-- [13. 解析入力生成規則（要約）](#13-解析入力生成規則要約)
-- [14. 適合性（Conformance）](#14-適合性conformance)
-- [15. 互換性と拡張](#15-互換性と拡張)
+- [13. 誤字（corr）](#13-誤字corr)
+- [14. 濁点付与（vMark）](#14-濁点付与vmark)
+- [15. 解析入力生成規則（要約）](#15-解析入力生成規則要約)
+- [16. 適合性（Conformance）](#16-適合性conformance)
+- [17. 互換性と拡張](#17-互換性と拡張)
 - [付録 A: 用語](#付録-a-用語)
 - [付録 B: 実装者向けメモ](#付録-b-実装者向けメモ)
 
@@ -52,7 +54,7 @@
 
 ```xml
 xmlns:ocx="https://openchj.github.io/ns/ocx"
-xmlns:tei="http://www.tei-c.org/ns/0.5"
+xmlns:tei="http://www.tei-c.org/ns/1.0"
 ```
 
 ### 3.2 接頭辞の運用方針（重要）
@@ -85,7 +87,7 @@ xmlns:tei="http://www.tei-c.org/ns/0.5"
 ```xml
 <ocx:doc textID="作品ID" corpusName="コーパス名"
          xmlns:ocx="https://openchj.github.io/ns/ocx"
-         xmlns:tei="http://www.tei-c.org/ns/0.5">
+         xmlns:tei="http://www.tei-c.org/ns/1.0">
   <tei:body>
     <tei:p>
       <tei:s>これは文です。</tei:s>
@@ -204,7 +206,6 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 - `kata2hira`　カタカナをひらがなに置き換えてから解析
 
-  
 ### 9.2 `ocx:skip`（解析対象外範囲）
 
 ```xml
@@ -312,20 +313,24 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
   <tei:s>あの泥坊が羨しい。</tei:s>
 </tei:sp>
 ```
+
 ---
 
-## 12. 誤字（corr）
+## 13. 誤字（corr）
 
-### 12.1 `ocx:corr`（誤字・修正）
+### 13.1 `ocx:corr`（誤字・修正）
 
-原文に対する修正を `ocx:corr` で表し、修正後の文字を要素とします。修正前の文字を`ocx:corr@orig`に保存します。
-衍字を処理した場合には空要素になります。脱字を処理した場合にはorig属性値は空になります。
+原文に対する修正を `ocx:corr` で表し、修正後の文字を要素内容とします。修正前の文字は `ocx:corr@orig` に保存します。
+
+- 衍字を処理した場合（原文の余分な文字を削除した場合）は空要素になります。
+- 脱字を処理した場合（原文にない文字を補った場合）は `@orig` の値が空文字列になります。
+
 （`tei:corr` とは仕様が異なります。）
 
 | 属性 | 必須 | 内容 |
 |---|---|---|
-| `orig` | ○ | 原表記 |
-| `type` |   | 修正のタイプ |
+| `orig` | ○ | 原表記（修正前の文字列。脱字の場合は空文字列） |
+| `type` | 任意 | 修正のタイプ（制限語彙） |
 
 `type` 制限語彙（v0.6）:
 `誤字` `衍字` `脱字`
@@ -333,27 +338,30 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 例:
 
 ```xml
-  <tei:s>智に<ocx:corr orig="動" type="誤字">働</ocx:corr>けば角が立つ。情に<ocx:corr orig="竿">棹</ocx:corr>させば流される。意地を通せば窮屈だ。とかく<ocx:corr orig="">に</cocx:orr>人の世は住みにくい。</tei:s>
+<tei:s>智に<ocx:corr orig="動" type="誤字">働</ocx:corr>けば角が立つ。情に<ocx:corr orig="竿">棹</ocx:corr>させば流される。意地を通せば<ocx:corr orig="ば" type="衍字"/>窮屈だ。とかく<ocx:corr orig="" type="脱字">に</ocx:corr>人の世は住みにくい。</tei:s>
 ```
+
+解析入力生成では、`ocx:corr` の **要素内容のみ**を出力し、`@orig` は保持情報（解析対象外）とします。
+
 ---
 
-## 12. 濁点付与（vMark）
+## 14. 濁点付与（vMark）
 
-### 12.1 `ocx:vMark`（濁点）
+### 14.1 `ocx:vMark`（濁点）
 
- 原文に付与されていなかった濁点を補った場合 `ocx:vMark` で表します。
+原文に付与されていなかった濁点を補った場合、濁点を補った文字を `ocx:vMark` で括って表します。
 
 例:
 
 ```xml
-  <tei:s>智に働け<vMark>ば</vMark>角が立つ。情に棹させば流される。意地を通せば窮屈だ。とかくに人の世は住みにくい。</tei:s>
-
+<tei:s>智に働け<ocx:vMark>ば</ocx:vMark>角が立つ。情に棹させば流される。意地を通せば窮屈だ。とかくに人の世は住みにくい。</tei:s>
 ```
 
+解析入力生成では、`ocx:vMark` の **要素内容（濁点を補った文字）**を出力します。
 
 ---
 
-## 13. 解析用テキスト生成規則（要約）
+## 15. 解析入力生成規則（要約）
 
 - `tei:s` の終端 → 文境界
 - `ocx:eos` → 改行（LF 相当）
@@ -363,27 +371,31 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 - `ocx:proc` → `norm` 適用 → `dic` 指定解析
 - `ocx:skip` → `tokenize` 規則で擬似トークン化し `pos` を付与
 - `ocx:wbr` → 除去
+- `ocx:corr` → 要素内容のみ出力（`@orig` は除外）
+- `ocx:vMark` → 要素内容のみ出力
+- `tei:speaker` → 除去
 
 ---
 
-## 14. 適合性（Conformance）
+## 16. 適合性（Conformance）
 
-### 14.1 OCX Standard 準拠文書
+### 16.1 OCX Standard 準拠文書
 
 OCX Standard 準拠と主張する文書は、少なくとも次を満たす必要があります。
 
 - `ocx:doc` ルート、必須属性 `textID`, `corpusName`
 - OCX 要素は常に `ocx:` 接頭辞付きで記述
 - `ocx:skip` の `@tokenize` は `single|space` のいずれか
-- `ocx:skip` の `@pos` は v0.5 制限語彙のいずれか
+- `ocx:skip` の `@pos` は制限語彙のいずれか
 - `ocx:odoriji@orig` は制限語彙のいずれか
 - `ocx:wbr` は `ocx:warigaki` 内にのみ出現
 - `ocx:eos` は `tei:s` 内に出現しない
+- `ocx:corr` は `@orig` を持ち、`@type` を持つ場合は制限語彙のいずれか
 - `tei:speaker` は原文にある場合のみ使用（補助的な話者名付与には使用しない）
 
 ---
 
-## 15. 互換性と拡張
+## 17. 互換性と拡張
 
 - `pos` 値の追加
 - `dic` 値の追加
