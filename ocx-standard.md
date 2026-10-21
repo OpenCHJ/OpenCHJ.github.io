@@ -488,7 +488,6 @@ TEI 文書は `tei:TEI` > `tei:teiHeader` + `tei:text` > `tei:front` / `tei:body
 |---|---|
 | `ocx:doc` | `tei:TEI` / `tei:text` |
 | `ocx:doc@textID` | `tei:TEI@xml:id` または `tei:idno` |
-| `ocx:doc@corpusName` | `tei:teiCorpus` や `tei:publicationStmt` など |
 
 ### C.2 使用しない TEI 要素と代わりの OCX 要素
 
