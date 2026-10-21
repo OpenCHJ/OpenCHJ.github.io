@@ -106,6 +106,8 @@ xmlns:tei="http://www.tei-c.org/ns/1.0"
 
 解析対象となるのは **`ocx:doc` の内部のみ**です。`tei:front`, `tei:back` などの要素も、`ocx:doc` の内部にあれば解析対象になります。埋め込み先文書（XHTML の `head` など）のうち `ocx:doc` の外にある部分は解析対象になりません。
 
+書誌情報などのヘッダー（`tei:teiHeader` や XHTML の `head` など）は、`ocx:doc` の **外** に置きます。`ocx:doc` の内部に置くと、その文字列が解析対象になります。
+
 ### 4.3 最小例（標準）
 
 ```xml
@@ -142,6 +144,8 @@ OCX Standard は TEI 語彙を **閉じたサブセットとしては限定し�
 
 - `tei:speaker`（話者表示）や `tei:head`（見出し）の文字列も解析対象です。解析から除きたい情報は、本文に書かずに属性値（例: `tei:sp@who`）に記録します。
 - `tei:foreign` などで外国語であることを示しても、形態素解析の対象のままです。形態素解析を行わない場合は `ocx:skip`（`pos="foreign"`）で囲みます（[13.2](#132-ocxskip解析対象外範囲)）。
+- `tei:w`, `tei:pc` などで語や句読点の単位を示しても、タグは無視されるため解析結果には反映されません（単位への分割は形態素解析が行います）。
+- `tei:add`（加筆）の要素内容は、通常の本文として解析対象になります。
 
 ### 5.2 使用しない TEI 要素と制約
 
@@ -150,6 +154,16 @@ OCX Standard は TEI 語彙を **閉じたサブセットとしては限定し�
 - `tei:note` は使用しません（注記は `ocx:comment` を使用し、本文に注釈が入り込むのを避ける）。
 - `tei:ruby` は使用しません（ルビは `ocx:r` を使用し、本文に振り仮名が入り込むのを避ける）。
 - `tei:choice` は使用しません（本文は解析対象となる一つにしぼる）。
+- `tei:app`, `tei:lem`, `tei:rdg`（校異）は使用しません（本文は解析対象となる一つにしぼる）。本文には採用した読みだけを書き、異文は `ocx:comment` に記録します。
+- `tei:del`（原文で削除された文字）、`tei:subst`（置き換え）は使用しません。削除された文字は `ocx:comment` に記録し、加筆された文字は本文として（必要なら `tei:add` で）記述します。
+- `tei:fw`（柱・ノンブル・丁付けなどの版面の文字）は使用しません。記録する場合は `ocx:comment` に記録するか、本文に残して `ocx:skip`（`pos="other"`）で囲みます。
+
+次の要素は OCX の要素と役割が重なるため使用せず、OCX の要素を用います。
+
+| TEI | 代わりに用いる OCX 要素 |
+|---|---|
+| `tei:sic`, `tei:corr`, `tei:supplied`, `tei:surplus` | `ocx:corr`（[11章](#11-誤字脱字衍字corr)） |
+| `tei:orig`, `tei:reg` | `ocx:odoriji`（[9章](#9-踊り字odoriji)）, `ocx:vMark`（[10章](#10-濁点付与vmark)） |
 
 その他の制約:
 
@@ -426,7 +440,7 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 - `ocx:doc` ルート、必須属性 `textID`, `corpusName`
 - OCX 要素は常に `ocx:` 接頭辞付きで記述（デフォルト名前空間による省略は不可）
 - 文境界を `tei:s` または `ocx:eos` で示す
-- [5.2](#52-使用しない-tei-要素と制約) で使用しないとした TEI 要素（`tei:note`, `tei:ruby`, `tei:choice`）を用いない
+- [5.2](#52-使用しない-tei-要素と制約) で使用しないとした TEI 要素を用いない
 - `tei:quote` は `tei:s` 内に出現しない
 - `tei:g` は要素内容（代替文字）を持つ
 - `ocx:eos` は `tei:s` 内に出現しない
@@ -497,6 +511,11 @@ TEI 文書は `tei:TEI` > `tei:teiHeader` + `tei:text` > `tei:front` / `tei:body
 | `tei:ruby` / `tei:rb` / `tei:rt` | `ocx:r` | ふりがなの文字列を本文に入れないため |
 | `tei:choice` + `tei:sic` / `tei:corr` | `ocx:corr` | 本文を解析対象となる一つにしぼるため |
 | `tei:choice` + `tei:orig` / `tei:reg` | `ocx:odoriji`, `ocx:vMark` | 同上 |
+| `tei:app` / `tei:lem` / `tei:rdg` | `ocx:comment`（異文を記録） | 同上 |
+| `tei:del`, `tei:subst` | `ocx:comment`（削除された文字を記録） | 削除された文字を本文に入れないため |
+| `tei:fw` | `ocx:comment` または `ocx:skip` | 版面の文字を本文として解析しないため |
+| `tei:sic`, `tei:corr`, `tei:supplied`, `tei:surplus` | `ocx:corr` | 書き方を一つにそろえるため |
+| `tei:orig`, `tei:reg` | `ocx:odoriji`, `ocx:vMark` | 同上 |
 
 ### C.3 意味がずれる点・名前が重なる点
 
@@ -509,7 +528,6 @@ TEI 文書は `tei:TEI` > `tei:teiHeader` + `tei:text` > `tei:front` / `tei:body
 
 - **外字 `tei:g`**: TEI では `<tei:g ref="#gaiji01"/>` のような空要素も使えますが、OCX では代替文字（見当たらない場合は `〓`）を要素内容として必ず記述します（[5.2](#52-使用しない-tei-要素と制約)）。
 - **外国語 `tei:foreign`**: TEI で外国語を示しても、OCX では形態素解析の対象のままです。形態素解析を行わない場合は `ocx:skip` で囲みます。
-- **会話と話者表示**: TEI の `tei:sp` は主に戯曲の台詞のための要素で、`tei:sp` の直下には `tei:p` や `tei:ab` などを置きます（`tei:s` を直接は置けません）。散文中の会話には `tei:said` や `tei:q` が用いられます。いずれの場合も、OCX では `tei:speaker` などの要素内容は解析対象です。話者表示を解析から除きたい場合は、本文に書かずに `@who` などの属性値に記録します。
 
 ### C.5 TEI への変換の目安
 
@@ -533,4 +551,4 @@ TEI 文書は `tei:TEI` > `tei:teiHeader` + `tei:text` > `tei:front` / `tei:body
 OCX 文書の `tei:*` 部分を TEI のスキーマで検証する場合は、ODD で次のカスタマイズを行います。
 
 - `https://openchj.github.io/ns/ocx` 名前空間の要素を、TEI 要素の内容として許可する
-- `tei:sp@who` などで任意の文字列を値として許可する（OCX の `@who` の扱いに合わせる場合）
+- `@who` で任意の文字列を値として許可する（OCX の `@who` の扱いに合わせる場合）
