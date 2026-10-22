@@ -152,12 +152,12 @@ OCX Standard の文書にすると、次のようになります。
 
 **辞書を変える（`ocx:proc`）**: 何も指定しなければ、現代書き言葉UniDic で解析されます。別の辞書で解析したい範囲は、`ocx:proc` の `@dic` で辞書を指定します。指定できる辞書は [Web茶まめ](https://chamame.ninjal.ac.jp/) で利用できる UniDic で、一覧は仕様書 [13.1](ocx-standard.md#131-ocxproc解析範囲の特殊処理) にあります。
 
-「やまなし」のような旧仮名づかいの口語文は、旧仮名口語UniDic（`Kyukana-kogo`）で解析するのが適しています。本文全体を `ocx:proc` で囲みます。
+「やまなし」のような旧仮名づかいの口語文は、旧仮名口語UniDic（`Qkana`）で解析するのが適しています。本文全体を `ocx:proc` で囲みます。
 
 ```xml
 <ocx:doc textID="宮沢賢治　やまなし" corpusName="青空文庫"
          xmlns:ocx="https://openchj.github.io/ns/ocx">
-<ocx:proc dic="Kyukana-kogo">
+<ocx:proc dic="Qkana">
 　小さな谷川の底を写した二枚の青い幻燈です。<ocx:eos/>
 …
 </ocx:proc>

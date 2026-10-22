@@ -386,7 +386,7 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 | `Gendai-spoken` | 現代話し言葉 | 現代 |
 | `Kansai` | 関西方言 | 現代 |
 | `Kingendai-novel` | 近現代口語小説 | 近代〜現代 |
-| `Kyukana-kogo` | 旧仮名口語 | 近代〜現代 |
+| `Qkana` | 旧仮名口語 | 近代〜現代 |
 | `Kindai-bungo` | 近代文語 | 近代 |
 | `Kinsei-edo` | 近世江戸口語 | 近世 |
 | `Kinsei-kamigata` | 近世上方口語 | 近世 |
