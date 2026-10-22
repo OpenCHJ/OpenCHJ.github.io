@@ -150,10 +150,18 @@ OCX Standard の文書にすると、次のようになります。
 
 ### 3.8 解析の制御: `ocx:proc` と `ocx:skip`
 
-**辞書を変える（`ocx:proc`）**: 何も指定しなければ、現代書き言葉UniDic で解析されます。文語文など別の辞書で解析したい範囲は、`ocx:proc` の `@dic` で辞書を指定します（指定できる辞書は仕様書 [13.1](ocx-standard.md#131-ocxproc解析範囲の特殊処理)）。
+**辞書を変える（`ocx:proc`）**: 何も指定しなければ、現代書き言葉UniDic で解析されます。別の辞書で解析したい範囲は、`ocx:proc` の `@dic` で辞書を指定します。指定できる辞書は [Web茶まめ](https://chamame.ninjal.ac.jp/) と同じで、一覧は仕様書 [13.1](ocx-standard.md#131-ocxproc解析範囲の特殊処理) にあります。
+
+「やまなし」のような旧仮名づかいの口語文は、旧仮名口語UniDic（`qkana`）で解析するのが適しています。本文全体を `ocx:proc` で囲みます。
 
 ```xml
-<ocx:proc dic="Kindai-bungo">文語文の範囲</ocx:proc>
+<ocx:doc textID="宮沢賢治　やまなし" corpusName="青空文庫"
+         xmlns:ocx="https://openchj.github.io/ns/ocx">
+<ocx:proc dic="qkana">
+　小さな谷川の底を写した二枚の青い幻燈です。<ocx:eos/>
+…
+</ocx:proc>
+</ocx:doc>
 ```
 
 **形態素解析をしない（`ocx:skip`）**: URL や外国語など、形態素解析にかけたくない範囲は `ocx:skip` で囲みます。文字は本文に残り、規則で区切られて `@pos` の品詞が付きます。

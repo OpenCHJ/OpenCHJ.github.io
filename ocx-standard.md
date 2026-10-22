@@ -364,7 +364,7 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 ### 13.1 `ocx:proc`（解析範囲の特殊処理）
 
 ```xml
-<ocx:proc dic="Kindai-bungo" norm="kata2hira">…</ocx:proc>
+<ocx:proc dic="kindai-bungo" norm="kata2hira">…</ocx:proc>
 ```
 
 | 属性 | 必須 | 内容 |
@@ -374,13 +374,33 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 **処理順**
 1. `norm` を適用（指定がある場合）
-2. `dic` で指定した辞書（指定がなければ既定辞書の現代書き言葉UniDic）で通常解析
+2. `dic` で指定した辞書（指定がなければ既定辞書の `cwj`：現代書き言葉UniDic）で通常解析
 
 `dic` 制限語彙
 
-- `Kindai-bungo`　近代文語UniDicで解析
-- `Chuko-wabun`　中古和文UniDicで解析
-- `Kansai`　関西方言UniDicで解析
+値は [Web茶まめ](https://chamame.ninjal.ac.jp/) で用いられている辞書の名前と同じです。
+
+| 値 | 辞書 | 時代 |
+|---|---|---|
+| `cwj` | 現代書き言葉UniDic（既定） | 現代 |
+| `csj` | 現代話し言葉UniDic | 現代 |
+| `D-kansai` | 関西方言UniDic | 現代 |
+| `novel` | 近現代口語小説UniDic | 近代〜現代 |
+| `qkana` | 旧仮名口語UniDic | 近代〜現代 |
+| `kindai-bungo` | 近代文語UniDic | 近代 |
+| `kinsei-bungo` | 近世文語UniDic | 近世 |
+| `kinsei-edo` | 近世江戸口語UniDic | 近世 |
+| `kinsei-kamigata` | 近世上方口語UniDic | 近世 |
+| `chusei-bungo` | 中世文語UniDic | 中古〜中世 |
+| `chusei-kougo` | 中世口語UniDic | 中世 |
+| `chuko` | 中古和文UniDic | 中古 |
+| `waka` | 和歌UniDic | 上代〜中古 |
+| `kanbunkei` | 漢文訓読文UniDic | 上代〜近代 |
+| `jodai` | 上代語UniDic | 上代 |
+
+既定の辞書で解析したい範囲を、別の辞書を指定した `ocx:proc` の中で示す場合は、`dic="cwj"` を指定します。
+
+以前の版の値 `Kindai-bungo`, `Chuko-wabun`, `Kansai` は、それぞれ `kindai-bungo`, `chuko`, `D-kansai` と同じ意味の値として引き続き認めます（非推奨）。
 
 `norm` 制限語彙
 
