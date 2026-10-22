@@ -2,6 +2,8 @@
 
 最終更新日: 2026-10-21 小木曽
 
+TEI を使わずに OCX Standard の文書を作る手順は、[OCX Standard の作り方（TEI を使わない場合）](ocx-standard-guide.md) を参照してください。
+
 ## 目次
 - [1. 目的と位置づけ](#1-目的と位置づけ)
 - [2. 基本原則](#2-基本原則)
@@ -372,13 +374,31 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 **処理順**
 1. `norm` を適用（指定がある場合）
-2. `dic` で指定した辞書（指定がなければ既定辞書の現代書き言葉UniDic）で通常解析
+2. `dic` で指定した辞書（指定がなければ既定辞書の `Gendai-written`：現代書き言葉）で通常解析
 
 `dic` 制限語彙
 
-- `Kindai-bungo`　近代文語UniDicで解析
-- `Chuko-wabun`　中古和文UniDicで解析
-- `Kansai`　関西方言UniDicで解析
+各辞書は [Web茶まめ](https://chamame.ninjal.ac.jp/) で利用できる UniDic です。値は辞書名をもとにした略称です。
+
+| 値 | 辞書名 | 時代 |
+|---|---|---|
+| `Gendai-written`（`Gendai` も可） | 現代書き言葉（既定） | 現代 |
+| `Gendai-spoken` | 現代話し言葉 | 現代 |
+| `Kansai` | 関西方言 | 現代 |
+| `Kingendai-novel` | 近現代口語小説 | 近代〜現代 |
+| `Kyukana-kogo` | 旧仮名口語 | 近代〜現代 |
+| `Kindai-bungo` | 近代文語 | 近代 |
+| `Kinsei-edo` | 近世江戸口語 | 近世 |
+| `Kinsei-kamigata` | 近世上方口語 | 近世 |
+| `Kinsei-bungo` | 近世文語 | 近世 |
+| `Chusei-kogo` | 中世口語 | 中世 |
+| `Chusei-bungo` | 中世文語 | 中古〜中世 |
+| `Chuko-wabun` | 中古和文 | 中古 |
+| `Jodai` | 上代語 | 上代 |
+| `Waka` | 和歌 | 上代〜中古 |
+| `Kanbunkei` | 漢文系 | 中古 |
+
+既定の辞書で解析したい範囲を、別の辞書を指定した `ocx:proc` の中で示す場合は、`dic="Gendai-written"`（または `dic="Gendai"`）を指定します。
 
 `norm` 制限語彙
 

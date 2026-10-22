@@ -9,3 +9,4 @@ OpenCHJのための二つのXML文書定義を策定しています（ドラフ�
 ### [OCX-standard](ocx-standard.md)
 
 - [https://openchj.github.io/ocx-standard](https://openchj.github.io/ocx-standard)
+- [OCX Standard の作り方（TEI を使わない場合）](ocx-standard-guide.md)
