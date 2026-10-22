@@ -374,29 +374,29 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 **処理順**
 1. `norm` を適用（指定がある場合）
-2. `dic` で指定した辞書（指定がなければ既定辞書の `cwj`：現代書き言葉UniDic）で通常解析
+2. `dic` で指定した辞書（指定がなければ既定辞書の `cwj`：現代書き言葉UniDic、Web茶まめでの表示は「現代語」）で通常解析
 
 `dic` 制限語彙
 
 値は [Web茶まめ](https://chamame.ninjal.ac.jp/) で用いられている辞書の名前と同じです。
 
-| 値 | 辞書 | 時代 |
+| 値 | Web茶まめでの表示 | 時代 |
 |---|---|---|
-| `cwj` | 現代書き言葉UniDic（既定） | 現代 |
-| `csj` | 現代話し言葉UniDic | 現代 |
-| `D-kansai` | 関西方言UniDic | 現代 |
-| `novel` | 近現代口語小説UniDic | 近代〜現代 |
-| `qkana` | 旧仮名口語UniDic | 近代〜現代 |
-| `kindai-bungo` | 近代文語UniDic | 近代 |
-| `kinsei-bungo` | 近世文語UniDic | 近世 |
-| `kinsei-edo` | 近世江戸口語UniDic | 近世 |
-| `kinsei-kamigata` | 近世上方口語UniDic | 近世 |
-| `chusei-bungo` | 中世文語UniDic | 中古〜中世 |
-| `chusei-kougo` | 中世口語UniDic | 中世 |
-| `chuko` | 中古和文UniDic | 中古 |
-| `waka` | 和歌UniDic | 上代〜中古 |
-| `kanbunkei` | 漢文訓読文UniDic | 上代〜近代 |
-| `jodai` | 上代語UniDic | 上代 |
+| `cwj` | 現代語（既定） | 現代 |
+| `csj` | 現代話し言葉 | 現代 |
+| `D-kansai` | 関西方言 | 現代 |
+| `novel` | 近現代口語小説 | 近代〜現代 |
+| `qkana` | 旧仮名口語 | 近代〜現代 |
+| `kindai-bungo` | 近代文語 | 近代 |
+| `kinsei-bungo` | 近世文語 | 近世 |
+| `kinsei-edo` | 近世江戸口語 | 近世 |
+| `kinsei-kamigata` | 近世上方口語 | 近世 |
+| `chusei-bungo` | 中世文語 | 中古〜中世 |
+| `chusei-kougo` | 中世口語 | 中世 |
+| `chuko` | 中古和文 | 中古 |
+| `waka` | 和歌 | 上代〜中古 |
+| `kanbunkei` | 漢文系 | 上代〜近代 |
+| `jodai` | 上代語 | 上代 |
 
 既定の辞書で解析したい範囲を、別の辞書を指定した `ocx:proc` の中で示す場合は、`dic="cwj"` を指定します。
 
