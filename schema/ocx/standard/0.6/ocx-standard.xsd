@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  OCX Standard v0.6β XML Schema (XSD 1.0)
+  https://openchj.github.io/ocx-standard
+
+  For documents that use OCX elements only (no TEI, XHTML or other
+  namespaces). Both prefixed (xmlns:ocx="...") and unprefixed
+  (xmlns="...") documents validate against this schema (spec 3.3).
+
+  Rules that XSD 1.0 cannot express (check them separately):
+  - ocx:r has at least one of @rt and @lrt (spec 8.1)
+  - ocx:corr does not have both empty content and empty @orig (spec 11.1)
+  - prefixed and unprefixed forms are not mixed in one document (spec 3.3)
+  - sentence boundaries are marked with ocx:eos (spec 1.1, 15.1)
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://openchj.github.io/ns/ocx"
+           xmlns:ocx="https://openchj.github.io/ns/ocx"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <!-- ============================================================
+       Content groups
+       ============================================================ -->
+
+  <!-- Character-level elements: the element content is output, the
+       original notation is kept in attributes (spec 9-11) -->
+  <xs:group name="charLevel">
+    <xs:choice>
+      <xs:element ref="ocx:odoriji"/>
+      <xs:element ref="ocx:vMark"/>
+      <xs:element ref="ocx:corr"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- Elements that may appear inside a sentence -->
+  <xs:group name="phraseLevel">
+    <xs:choice>
+      <xs:element ref="ocx:r"/>
+      <xs:group ref="ocx:charLevel"/>
+      <xs:element ref="ocx:comment"/>
+      <xs:element ref="ocx:warigaki"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- Everything allowed in body text -->
+  <xs:group name="bodyLevel">
+    <xs:choice>
+      <xs:element ref="ocx:eos"/>
+      <xs:group ref="ocx:phraseLevel"/>
+      <xs:element ref="ocx:proc"/>
+      <xs:element ref="ocx:skip"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- ============================================================
+       Root (spec 4.1)
+       ============================================================ -->
+  <xs:element name="doc">
+    <xs:complexType mixed="true">
+      <xs:group ref="ocx:bodyLevel" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:attribute name="textID" type="xs:string" use="required"/>
+      <xs:attribute name="corpusName" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ============================================================
+       Sentence boundary (spec 6.2)
+       ============================================================ -->
+  <xs:element name="eos">
+    <xs:complexType/>
+  </xs:element>
+
+  <!-- ============================================================
+       Warigaki (spec 7)
+       ocx:wbr is allowed only directly inside ocx:warigaki.
+       ============================================================ -->
+  <xs:element name="warigaki">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ocx:wbr"/>
+        <xs:element ref="ocx:eos"/>
+        <xs:element ref="ocx:r"/>
+        <xs:group ref="ocx:charLevel"/>
+        <xs:element ref="ocx:comment"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="wbr">
+    <xs:complexType/>
+  </xs:element>
+
+  <!-- ============================================================
+       Ruby (spec 8)
+       ============================================================ -->
+  <xs:element name="r">
+    <xs:complexType mixed="true">
+      <xs:group ref="ocx:charLevel" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:attribute name="rt" type="xs:string"/>
+      <xs:attribute name="lrt" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ============================================================
+       Odoriji (spec 9)
+       ocx:vMark may be nested inside ocx:odoriji, not the reverse.
+       ============================================================ -->
+  <xs:element name="odoriji">
+    <xs:complexType mixed="true">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ocx:vMark"/>
+      </xs:sequence>
+      <xs:attribute name="orig" type="ocx:odorijiOrigType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="odorijiOrigType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ゝ"/>
+      <xs:enumeration value="ゞ"/>
+      <xs:enumeration value="ヽ"/>
+      <xs:enumeration value="ヾ"/>
+      <xs:enumeration value="〻"/>
+      <xs:enumeration value="々"/>
+      <xs:enumeration value="〳〵"/>
+      <xs:enumeration value="〱"/>
+      <xs:enumeration value="〲"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ============================================================
+       Voiced mark added by the editor (spec 10): exactly 1 character
+       ============================================================ -->
+  <xs:element name="vMark">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:length value="1"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <!-- ============================================================
+       Correction (spec 11)
+       Content: corrected text (empty for 衍字).
+       @orig: original text (empty string for 脱字).
+       ============================================================ -->
+  <xs:element name="corr">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ocx:odoriji"/>
+        <xs:element ref="ocx:vMark"/>
+      </xs:choice>
+      <xs:attribute name="orig" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ============================================================
+       Comment (spec 12): attribute only
+       ============================================================ -->
+  <xs:element name="comment">
+    <xs:complexType>
+      <xs:attribute name="text" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ============================================================
+       Analysis control (spec 13)
+       ============================================================ -->
+  <xs:element name="proc">
+    <xs:complexType mixed="true">
+      <xs:group ref="ocx:bodyLevel" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:attribute name="dic" type="ocx:dicType"/>
+      <xs:attribute name="norm" type="ocx:normType"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="dicType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Gendai-written"/>
+      <xs:enumeration value="Gendai"/>
+      <xs:enumeration value="Gendai-spoken"/>
+      <xs:enumeration value="Kansai"/>
+      <xs:enumeration value="Kingendai-novel"/>
+      <xs:enumeration value="Qkana"/>
+      <xs:enumeration value="Kindai-bungo"/>
+      <xs:enumeration value="Kinsei-edo"/>
+      <xs:enumeration value="Kinsei-kamigata"/>
+      <xs:enumeration value="Kinsei-bungo"/>
+      <xs:enumeration value="Chusei-kogo"/>
+      <xs:enumeration value="Chusei-bungo"/>
+      <xs:enumeration value="Chuko-wabun"/>
+      <xs:enumeration value="Jodai"/>
+      <xs:enumeration value="Waka"/>
+      <xs:enumeration value="Kanbunkei"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="normType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="kata2hira"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ocx:skip: not morphologically analysed; pseudo-tokenized -->
+  <xs:element name="skip">
+    <xs:complexType mixed="true">
+      <xs:group ref="ocx:phraseLevel" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:attribute name="tokenize" type="ocx:tokenizeType" use="required"/>
+      <xs:attribute name="pos" type="ocx:posType" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="tokenizeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="single"/>
+      <xs:enumeration value="space"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="posType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="kanbun"/>
+      <xs:enumeration value="foreign"/>
+      <xs:enumeration value="uri"/>
+      <xs:enumeration value="code"/>
+      <xs:enumeration value="other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

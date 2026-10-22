@@ -285,6 +285,7 @@ OCX Standard の文書にすると、次のようになります。
 
 - [ ] ファイルの文字コードは UTF-8
 - [ ] XML として整形式である（`xmllint --noout ファイル名` などで確認）
+- [ ] XSD による検証を通る（`xmllint --noout --schema ocx-standard.xsd ファイル名` などで確認。XSD は <https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.xsd>）
 - [ ] 全体が `ocx:doc` で囲まれ、`textID` と `corpusName` がある
 - [ ] OCX 要素は、すべてに `ocx:` が付いているか、すべて省略して `xmlns="https://openchj.github.io/ns/ocx"` を宣言している
 - [ ] すべての文の終わりに `<ocx:eos/>` がある
