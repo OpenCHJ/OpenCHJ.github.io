@@ -2,8 +2,6 @@
 
 最終更新日: 2026-10-21 小木曽
 
-TEI を使わずに OCX Standard の文書を作る手順は、[OCX Standard の作り方（TEI を使わない場合）](ocx-standard-guide.md) を参照してください。
-
 ## 目次
 - [1. 目的と位置づけ](#1-目的と位置づけ)
 - [2. 基本原則](#2-基本原則)
@@ -37,6 +35,8 @@ TEI を使わずに OCX Standard の文書を作る手順は、[OCX Standard の
 
 **OCX Standard** は、OCX mini（最小マークアップ）を包含しつつ、TEI 語彙を利用し、OCX 独自語彙で解析制御を明示します。  
 本規格は **TEI 文書そのものではありません**（TEI の語彙を借用しつつ、解析用途に最適化します）。TEI ガイドラインとの対応と相違点は [付録 C](#付録-c-tei-ガイドラインとの対応と相違点) にまとめています。
+
+TEI を使わずに OCX Standard の文書を作ることもできます。その手順は、[OCX Standard の作り方（TEI を使わない場合）](ocx-standard-guide.md) を参照してください。
 
 ### 1.1 OCX mini との関係
 
