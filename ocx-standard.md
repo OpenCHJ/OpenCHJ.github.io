@@ -519,23 +519,46 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 
 ### B.1 スキーマ
 
-OCX の要素だけで書く文書（[3.3](#33-接頭辞の省略ocx-の要素だけで書く文書) の条件を満たす文書、および接頭辞付きで OCX の要素だけを用いる文書）用の XSD を公開しています。
+検証用に次の 3 つのファイルを公開しています。XSD で要素の配置と属性値を検証し、XSD では表現できない規則を Schematron で検証します。
 
-- XSD: <https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.xsd>
+| ファイル | 対象 |
+|---|---|
+| [ocx-standard.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.xsd) | OCX の要素だけで書く文書（接頭辞の有無は問わない） |
+| [ocx-standard-tei.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard-tei.xsd) | TEI の要素と組み合わせる文書 |
+| [ocx-standard.sch](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.sch) | 上のどちらの文書にも使う Schematron |
 
-次の規則は XSD 1.0 では表現できないため、この XSD では検証されません。
+`ocx-standard-tei.xsd` は、TEI 要素を閉じたサブセットとして限定しない方針（[5章](#5-tei-語彙の利用)）に合わせ、TEI 要素を緩やかに（`processContents="lax"`）許容します。TEI 要素自体の構造は検証しませんが、TEI 要素の中にある OCX 要素は検証します。
 
-- `ocx:r` が `@rt` と `@lrt` の少なくとも一方を持つこと
-- `ocx:corr` の要素内容と `@orig` の両方が空ではないこと
-- 接頭辞付きの書き方と省略した書き方を混在させないこと
-- 文境界が `ocx:eos` で示されていること
+Schematron（`ocx-standard.sch`）では、次の規則を検証します。
 
-TEI など他の名前空間の要素と組み合わせる文書のためのスキーマは、将来次の形で同梱することを想定します。
+- 接頭辞付きの書き方と省略した書き方を混在させないこと、TEI と組み合わせる文書では接頭辞を付けること（[3.2](#32-接頭辞の運用方針重要), [3.3](#33-接頭辞の省略ocx-の要素だけで書く文書)）
+- 使用しない TEI 要素を用いないこと、`tei:g` が代替文字を持つこと（[5.2](#52-使用しない-tei-要素と制約)）
+- 文境界が示されていること、`tei:s` を入れ子にしないこと、`ocx:eos` を `tei:s` の内部に置かないこと（[6章](#6-文境界)）
+- `ocx:wbr` が `ocx:warigaki` の内部にあること（[7.3](#73-割書内改行-ocxwbr空要素)）
+- `ocx:r` が `@rt` と `@lrt` の少なくとも一方を持つこと（[8.1](#81-ocxr)）
+- `ocx:odoriji` と `ocx:vMark` の入れ子の順（[10.2](#102-踊り字との組み合わせ)）
+- `ocx:corr` の要素内容と `@orig` の両方が空ではないこと（[11.1](#111-ocxcorr誤字脱字衍字の修正)）
 
-- ODD（TEI カスタマイゼーション）
-- XSD（検証用）
+文境界は、`tei:s` または `ocx:eos` が文書中にあるかどうかだけを検証します。すべての文が区切られているかどうかは検証できません。
 
-TEI 要素は閉じたサブセットとして限定しないため（[5章](#5-tei-語彙の利用)）、スキーマでは OCX 要素を厳密に検証し、TEI 要素は緩やかに（lax に）許容することを想定します。
+検証の例（Python の lxml を使う場合）:
+
+```python
+from lxml import etree, isoschematron
+
+doc = etree.parse("document.xml")
+xsd = etree.XMLSchema(etree.parse("ocx-standard.xsd"))  # TEI と組み合わせる場合は ocx-standard-tei.xsd
+sch = isoschematron.Schematron(etree.parse("ocx-standard.sch"), store_report=True)
+
+print(xsd.validate(doc), xsd.error_log)
+print(sch.validate(doc))
+for text in sch.validation_report.iter("{http://purl.oclc.org/dsdl/svrl}text"):
+    print(text.text.strip())
+```
+
+XSD の検証には `xmllint --noout --schema ocx-standard.xsd document.xml` も使えます。Schematron は、oXygen などの XML エディタでも使えます。
+
+TEI の構造まで含めて検証する場合は、TEI のカスタマイズ（ODD）で `https://openchj.github.io/ns/ocx` 名前空間の要素を許可したスキーマを作る必要があります。
 
 TEI のスキーマ（TEI All など）で検証する場合、`ocx:*` 要素は TEI の名前空間外の要素としてエラーになります。ODD で `https://openchj.github.io/ns/ocx` 名前空間の要素を許可するカスタマイズが必要です（[付録 C.6](#c6-tei-スキーマで検証する場合)）。
 
