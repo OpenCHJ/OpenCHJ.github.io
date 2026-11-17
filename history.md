@@ -44,4 +44,23 @@
 
 ------
 
+## OpenCHJ XML（OCX）文書定義の更新履歴
+
+### 2026.11
+- TEI と組み合わせる文書用の XSD（[ocx-standard-tei.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard-tei.xsd)）と、XSD で表現できない規則を検証する Schematron（[ocx-standard.sch](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.sch)）を公開
+
+### 2026.10
+- [OCX Standard v0.6β](ocx-standard.md) を公開（v0.5 からの変更点は [付録 D](ocx-standard.md#付録-d-v05-からの変更点)）
+  - `ocx:corr`（誤字・脱字・衍字）と `ocx:vMark`（濁点の補い）を追加
+  - OCX の要素だけで書く文書で接頭辞 `ocx:` の省略を認め、OCX mini 準拠文書がそのまま OCX Standard 準拠文書となるようにした
+  - `ocx:proc@dic` で指定できる辞書を、Web茶まめで利用できる UniDic に拡張
+  - TEI 語彙を閉じたサブセットとして限定しない方針とし、TEI ガイドラインとの対応と相違点を付録にまとめた
+- [OCX Standard の作り方（TEI を使わない場合）](ocx-standard-guide.md) を公開
+- OCX の要素だけで書く文書用の XSD（[ocx-standard.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.xsd)）を公開
+
+### 2025.12
+- [OCX mini](ocx-mini.md)（ドラフト）と XSD・ODD、[OCX Standard v0.5](ocx-standard_v05.md)（ドラフト）を公開
+
+------
+
 | [TOP](index.md) | [更新履歴](history.md) | [整備中の資料・作品](ongoing.md) | [語数について](wc.md) |
