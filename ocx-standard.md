@@ -543,6 +543,8 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 | [ocx-standard-tei.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard-tei.xsd) | TEI の要素と組み合わせる文書 |
 | [ocx-standard.sch](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.sch) | 上のどちらの文書にも使う Schematron |
 
+スキーマの置き場所（URL）は、小数点第1位までのバージョンごとに分けています。小数点第2位以下のバージョンアップ（例: v0.6β → v0.61β）では置き場所を変えず、同じ URL のファイルを更新します。v0.61β のスキーマも `schema/ocx/standard/0.6/` に置いています。
+
 `ocx-standard-tei.xsd` は、TEI 要素を閉じたサブセットとして限定しない方針（[5章](#5-tei-語彙の利用)）に合わせ、TEI 要素を緩やかに（`processContents="lax"`）許容します。TEI 要素自体の構造は検証しませんが、TEI 要素の中にある OCX 要素は検証します。
 
 Schematron（`ocx-standard.sch`）では、次の規則を検証します。
