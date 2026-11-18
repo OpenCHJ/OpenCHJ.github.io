@@ -222,6 +222,7 @@
   <xs:simpleType name="normType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="kata2hira"/>
+      <xs:enumeration value="none"/>
     </xs:restriction>
   </xs:simpleType>
 
