@@ -179,6 +179,17 @@ OCX Standard の文書にすると、次のようになります。
 </ocx:doc>
 ```
 
+**カタカナをひらがなにしてから解析する（`@norm`）**: カタカナ交じりの文語文などは、`ocx:proc` に `norm="kata2hira"` を指定すると、カタカナをひらがなに置き換えてから解析します。
+
+**`ocx:proc` を入れ子にする**: 内側の `ocx:proc` は、指定していない属性を外側から引き継ぎ、指定した属性だけを上書きします。外側の辞書指定を取り消すには `dic="Gendai-written"`、外側の正規化を取り消すには `norm="none"` を指定します。詳しくは仕様書 [13.1](ocx-standard.md#131-ocxproc解析範囲の特殊処理) を参照してください。
+
+```xml
+<ocx:proc dic="Kindai-bungo" norm="kata2hira">
+  カタカナ交じりの文語文
+  <ocx:proc norm="none">カタカナのまま解析する範囲</ocx:proc>
+</ocx:proc>
+```
+
 **形態素解析をしない（`ocx:skip`）**: URL や外国語など、形態素解析にかけたくない範囲は `ocx:skip` で囲みます。文字は本文に残り、規則で区切られて `@pos` の品詞が付きます。
 
 ```xml
