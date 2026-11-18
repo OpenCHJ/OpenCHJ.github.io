@@ -423,6 +423,22 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 `norm` 制限語彙
 
 - `kata2hira`　カタカナをひらがなに置き換えてから解析
+- `none`　正規化を行わない（外側の `ocx:proc` で指定した `norm` を取り消す）
+
+**入れ子にした場合**
+
+`ocx:proc` は入れ子にできます。内側の `ocx:proc` は、指定していない属性について外側の `ocx:proc` の指定を引き継ぎ、指定した属性は外側の指定を上書きします。
+
+- 外側の辞書指定を取り消して既定の辞書に戻す場合は、`dic="Gendai-written"`（または `dic="Gendai"`）を指定します。
+- 外側の正規化指定を取り消す場合は、`norm="none"` を指定します。
+
+```xml
+<ocx:proc dic="Kindai-bungo" norm="kata2hira">
+  カタカナ交じりの文語文（近代文語UniDic、カタカナをひらがなに置き換えて解析）
+  <ocx:proc norm="none">カタカナのまま解析する範囲（近代文語UniDic）</ocx:proc>
+  <ocx:proc dic="Gendai-written" norm="none">既定の状態で解析する範囲</ocx:proc>
+</ocx:proc>
+```
 
 ### 13.2 `ocx:skip`（解析対象外範囲）
 
@@ -638,6 +654,7 @@ OCX 文書の `tei:*` 部分を TEI のスキーマで検証する場合は、OD
 - **`ocx:r`**: 左側のふりがなを表す `@lrt` を追加しました。`@rt` と `@lrt` の少なくとも一方が必要です（[8.1](#81-ocxr)）。
 - **`ocx:odoriji`**: `@orig` の制限語彙に `〻` を追加しました。`々` は自動展開しないこと、`ocx:vMark` と組み合わせる場合の入れ子の順を明記しました（[9.1](#91-ocxodoriji)）。
 - **`ocx:proc@dic`**: Web茶まめで利用できる UniDic に合わせて制限語彙を拡張し、既定の辞書を `Gendai-written`（現代書き言葉）と明記しました（[13.1](#131-ocxproc解析範囲の特殊処理)）。
+- **`ocx:proc` の入れ子**: 内側の `ocx:proc` が外側の指定を引き継ぎ・上書きする規則を定め、外側の正規化を取り消す `norm="none"` を追加しました（[13.1](#131-ocxproc解析範囲の特殊処理)）。
 
 ### D.2 TEI 語彙の扱い
 

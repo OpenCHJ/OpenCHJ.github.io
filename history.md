@@ -47,6 +47,7 @@
 ## OpenCHJ XML（OCX）文書定義の更新履歴
 
 ### 2026.11
+- `ocx:proc` の入れ子の規則を定め、外側の正規化を取り消す `norm="none"` を追加（[OCX Standard 13.1](ocx-standard.md#131-ocxproc解析範囲の特殊処理)）
 - TEI と組み合わせる文書用の XSD（[ocx-standard-tei.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard-tei.xsd)）と、XSD で表現できない規則を検証する Schematron（[ocx-standard.sch](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.sch)）を公開
 
 ### 2026.10
