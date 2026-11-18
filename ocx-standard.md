@@ -1,4 +1,4 @@
-# OCX Standard v0.6β
+# OCX Standard v0.61β
 
 最終更新日: 2026-11-18 小木曽
 
