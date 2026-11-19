@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  OCX Standard v0.61β Schematron rules (ISO Schematron, XPath 1.0)
+  OCX Standard v0.62β Schematron rules (ISO Schematron, XPath 1.0)
   https://openchj.github.io/ocx-standard
 
   Rules that the XSDs (ocx-standard.xsd, ocx-standard-tei.xsd) cannot
@@ -10,7 +10,7 @@
 <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             queryBinding="xslt" xml:lang="ja">
 
-  <sch:title>OCX Standard v0.61β</sch:title>
+  <sch:title>OCX Standard v0.62β</sch:title>
 
   <sch:ns prefix="ocx" uri="https://openchj.github.io/ns/ocx"/>
   <sch:ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
@@ -68,8 +68,8 @@
       </sch:assert>
     </sch:rule>
     <sch:rule context="ocx:eos">
-      <sch:assert test="not(ancestor::tei:s)">
-        ocx:eos は tei:s の内部に置いてはなりません（6.2）。
+      <sch:assert test="not(ancestor::tei:s) or (parent::tei:s and not(following-sibling::*) and not(following-sibling::text()[normalize-space() != '']))">
+        ocx:eos は tei:s の内部では終端の直前にのみ置けます（6.2）。
       </sch:assert>
     </sch:rule>
   </sch:pattern>

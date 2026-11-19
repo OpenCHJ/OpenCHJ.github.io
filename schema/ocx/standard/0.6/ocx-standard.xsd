@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  OCX Standard v0.61β XML Schema (XSD 1.0)
+  OCX Standard v0.62β XML Schema (XSD 1.0)
   https://openchj.github.io/ocx-standard
 
   For documents that use OCX elements only (no TEI, XHTML or other
@@ -61,6 +61,7 @@
       <xs:group ref="ocx:bodyLevel" minOccurs="0" maxOccurs="unbounded"/>
       <xs:attribute name="textID" type="xs:string" use="required"/>
       <xs:attribute name="corpusName" type="xs:string" use="required"/>
+      <xs:attribute name="version" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 
