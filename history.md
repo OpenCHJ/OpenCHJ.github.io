@@ -48,7 +48,7 @@
 
 ### 2026.11
 - OCX Standard に、原本と解析用 XML の区別、文字コード、文字オフセットの数え方、`ocx:doc` の `version` 属性を追加。`tei:s` の終端直前の `ocx:eos` を一つの文境界として扱うよう変更（[付録 D.3](ocx-standard.md#d3-解析入力生成の明確化)）
-- [OCX Standard](ocx-standard.md) を v0.61β に更新
+- [OCX Standard](ocx-standard.md) を v0.62β に更新
 - `ocx:proc` の入れ子の規則を定め、外側の正規化を取り消す `norm="none"` を追加（[OCX Standard 13.1](ocx-standard.md#131-ocxproc解析範囲の特殊処理)）
 - TEI と組み合わせる文書用の XSD（[ocx-standard-tei.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard-tei.xsd)）と、XSD で表現できない規則を検証する Schematron（[ocx-standard.sch](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard.sch)）を公開
 
