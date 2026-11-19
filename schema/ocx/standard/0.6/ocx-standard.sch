@@ -68,8 +68,8 @@
       </sch:assert>
     </sch:rule>
     <sch:rule context="ocx:eos">
-      <sch:assert test="not(ancestor::tei:s)">
-        ocx:eos は tei:s の内部に置いてはなりません（6.2）。
+      <sch:assert test="not(ancestor::tei:s) or (parent::tei:s and not(following-sibling::*) and not(following-sibling::text()[normalize-space() != '']))">
+        ocx:eos は tei:s の内部では終端の直前にのみ置けます（6.2）。
       </sch:assert>
     </sch:rule>
   </sch:pattern>

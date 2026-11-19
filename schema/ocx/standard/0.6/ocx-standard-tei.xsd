@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  OCX Standard v0.61β XML Schema for documents combined with TEI (XSD 1.0)
+  OCX Standard v0.61β XML Schema for documents combined with TEI or XHTML (XSD 1.0)
   https://openchj.github.io/ocx-standard
 
-  For documents that combine OCX elements with TEI elements
-  (http://www.tei-c.org/ns/1.0). For OCX-only documents use
+  For documents that combine OCX elements with elements of other
+  namespaces (TEI, XHTML, ...). The root must be ocx:doc: extract ocx:doc
+  from a TEI/XHTML host document before validating. For OCX-only documents use
   ocx-standard.xsd.
 
-  OCX elements are validated strictly. TEI elements are accepted with
+  OCX elements are validated strictly. Non-OCX elements are accepted with
   processContents="lax": their own structure is not checked, but OCX
   elements inside them are validated (spec 5: the TEI vocabulary is not
   a closed subset).
 
   Rules this schema does not check (use ocx-standard.sch):
   - TEI elements that are not used (spec 5.2)
-  - tei:s is not nested; ocx:eos is not inside tei:s (spec 6)
+  - tei:s is not nested; ocx:eos inside tei:s only right before its end (spec 6)
   - tei:g has a substitute character (spec 5.2)
   - ocx:wbr only inside ocx:warigaki (spec 7.3)
   - ocx:r has at least one of @rt and @lrt (spec 8.1)
@@ -42,10 +43,10 @@
     </xs:choice>
   </xs:group>
 
-  <!-- Any TEI element (structure not checked; OCX elements inside are) -->
+  <!-- Any non-OCX element (structure not checked; OCX elements inside are) -->
   <xs:group name="tei">
     <xs:choice>
-      <xs:any namespace="http://www.tei-c.org/ns/1.0" processContents="lax"/>
+      <xs:any namespace="##other" processContents="lax"/>
     </xs:choice>
   </xs:group>
 
@@ -78,6 +79,7 @@
       <xs:group ref="ocx:bodyLevel" minOccurs="0" maxOccurs="unbounded"/>
       <xs:attribute name="textID" type="xs:string" use="required"/>
       <xs:attribute name="corpusName" type="xs:string" use="required"/>
+      <xs:attribute name="version" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 
