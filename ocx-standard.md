@@ -519,6 +519,15 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 - `code`（プログラムコード）
 - `other`（その他）
 
+**`ocx:proc` との関係**
+
+- `ocx:proc` の中に `ocx:skip` を置けます。その場合は `ocx:skip` を優先し、`ocx:skip` の範囲には外側の `ocx:proc` の `dic`・`norm` を適用しません。
+- `ocx:skip` の中に `ocx:proc` を置いてはなりません。
+
+```xml
+<ocx:proc dic="Kindai-bungo">文語文<ocx:skip tokenize="single" pos="foreign">English</ocx:skip>文語文</ocx:proc>
+```
+
 ---
 
 ## 14. 解析入力生成規則（要約）
@@ -541,7 +550,7 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 - `ocx:corr` → 要素内容のみ出力（`@orig` は除外）
 - `ocx:comment` → 除去
 - `ocx:proc` → `norm` 適用 → `dic` 指定解析
-- `ocx:skip` → `tokenize` 規則で擬似トークン化し `pos` を付与
+- `ocx:skip` → `tokenize` 規則で擬似トークン化し `pos` を付与（`ocx:proc` の中にあっても `dic`・`norm` は適用しない）
 - 属性値 → 出力しない
 
 ### 14.2 文字オフセット
@@ -591,6 +600,7 @@ OCX Standard 準拠と主張する文書は、少なくとも次を満たす必�
 - `ocx:proc` の `@dic`, `@norm` は制限語彙のいずれか
 - `ocx:skip` の `@tokenize` は `single|space` のいずれか
 - `ocx:skip` の `@pos` は制限語彙のいずれか
+- `ocx:proc` は `ocx:skip` 内に出現しない
 
 ---
 
@@ -637,6 +647,7 @@ Schematron（`ocx-standard.sch`）では、次の規則を検証します。
 - 文境界が示されていること、`tei:s` を入れ子にしないこと、`ocx:eos` を `tei:s` の内部の終端直前以外に置かないこと（[6章](#6-文境界)）
 - `ocx:wbr` が `ocx:warigaki` の内部にあること（[7.3](#73-割書内改行-ocxwbr空要素)）
 - `ocx:r` が `@rt` と `@lrt` の少なくとも一方を持つこと（[8.1](#81-ocxr)）
+- `ocx:proc` を `ocx:skip` の内部に置かないこと（[13.2](#132-ocxskip解析対象外範囲)）
 - `ocx:odoriji` と `ocx:vMark` の入れ子の順（[10.2](#102-踊り字との組み合わせ)）
 - `ocx:corr` の要素内容と `@orig` の両方が空ではないこと（[11.1](#111-ocxcorr誤字脱字衍字の修正)）
 
@@ -761,6 +772,7 @@ OCX 文書の `tei:*` 部分を TEI のスキーマで検証する場合は、OD
 - `tei:s` の終端の直前に置いた `ocx:eos` を、`tei:s` の終端と合わせて一つの文境界として扱うことにしました（[6.2](#62-ocxeos文境界表示)）。
 - `ocx:doc` に、文書が従う版を示す任意属性 `version` を追加しました（[4.1](#41-本文コンテナ-ocxdoc)）。
 - OCX が独自の要素を定める場合を限定し、それ以外の情報（ページ・見出し・会話・詩歌など）は TEI の語彙で表す方針を明記しました（[5.3](#53-ocx-の要素と-tei-の語彙の使い分け)）。
+- `ocx:proc` の中の `ocx:skip` は `ocx:skip` を優先すること、`ocx:skip` の中に `ocx:proc` を置けないことを定めました（[13.2](#132-ocxskip解析対象外範囲)）。
 - 原本の一つのファイルに複数の `ocx:doc` を置けることにしました。それぞれを別々の文書として扱い、入れ子は認めません（[4.1](#41-本文コンテナ-ocxdoc)）。
 - `ocx:skip tokenize="space"` の分割に用いる空白は全角スペースであることを明記しました（[13.2](#132-ocxskip解析対象外範囲)）。
 - 「解析対象外」は「形態素解析を行わない」という意味であることを定義しました（[2章](#2-基本原則)、[付録 A](#付録-a-用語)）。
