@@ -10,6 +10,7 @@ OpenCHJのための二つのXML文書定義を策定しています（ドラフ�
 
 - [https://openchj.github.io/ocx-standard](https://openchj.github.io/ocx-standard)
 - [OCX Standard の作り方（TEI を使わない場合）](ocx-standard-guide.md)
+- 検証用スキーマ（XSD・Schematron）: [付録 B.1](ocx-standard.md#b1-スキーマ)
 
 ### [形態論情報データの形式](ocx-morph.md)
 
