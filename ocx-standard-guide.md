@@ -1,6 +1,6 @@
 # OCX Standard の作り方（TEI を使わない場合）
 
-最終更新日: 2026-11-19 小木曽
+最終更新日: 2026-11-20 小木曽
 
 このページでは、TEI を使わずに、プレーンテキストに `ocx:` のタグだけを入れて **OCX Standard 準拠の文書** を作る手順を説明します。例文には宮沢賢治「やまなし」（青空文庫）を用います。
 
@@ -13,6 +13,7 @@
 - [4. 完成例と解析用テキスト](#4-完成例と解析用テキスト)
 - [5. よくある間違い](#5-よくある間違い)
 - [6. 提出前のチェックリスト](#6-提出前のチェックリスト)
+- [7. OCX の要素で表せない情報が必要になったら](#7-ocx-の要素で表せない情報が必要になったら)
 
 ---
 
@@ -308,6 +309,45 @@ OCX Standard の文書にすると、次のようになります。
 - [ ] `ocx:corr` は `@orig` を持ち、中身と `@orig` の両方が空ではない
 - [ ] `ocx:wbr` は `ocx:warigaki` の中だけにある
 - [ ] `ocx:proc` の `@dic`, `@norm` と `ocx:skip` の `@tokenize`, `@pos` は、仕様書の制限語彙のいずれか
+
+---
+
+## 7. OCX の要素で表せない情報が必要になったら
+
+底本のページ、見出し、会話、詩歌の構造など、OCX の要素で表せない情報が必要になったら、**TEI の要素を足します**。OCX には、同じ役割の要素を設けていません（仕様書 [5.3](ocx-standard.md#53-ocx-の要素と-tei-の語彙の使い分け)）。
+
+| 表したい情報 | 用いる TEI 要素の例 |
+|---|---|
+| 底本のページ・行 | `tei:pb`, `tei:lb` |
+| 見出し | `tei:head` |
+| 会話・引用 | `tei:said`, `tei:q` |
+| 詩歌 | `tei:lg`, `tei:l`, `tei:caesura` |
+| 外字 | `tei:g`（代替文字を中に書く。なければ `〓`） |
+
+`ocx:doc` をルートにしたまま、その中で TEI の要素を使えます。TEI の名前空間の宣言（`xmlns:tei`）を加えます。
+
+```xml
+<ocx:doc textID="仏足石歌" corpusName="上代歌謡"
+         xmlns:ocx="https://openchj.github.io/ns/ocx"
+         xmlns:tei="http://www.tei-c.org/ns/1.0">
+<tei:lg n="1" type="waka"><ocx:r rt="美">み</ocx:r><ocx:r rt="阿">あ</ocx:r><ocx:r rt="止">と</ocx:r>…<tei:caesura/>…<ocx:eos/></tei:lg>
+</ocx:doc>
+```
+
+（[OpenCHJ-JodaiKayo](https://github.com/togiso/OpenCHJ-JodaiKayo) の例。一首を `tei:lg`、句切れを `tei:caesura` で表しています。）
+
+TEI の要素を足すときは、次の点に注意します。
+
+- **`ocx:` を省略できなくなります。** 接頭辞を省略して書いていた場合は、すべての OCX 要素に `ocx:` を付けます。
+- **TEI の要素の中の文字も解析されます。** 見出し（`tei:head`）なども本文として解析されます。解析したくない情報は、属性値か `ocx:comment` に書きます。
+- **使わない TEI 要素があります。** `tei:note`（注記は `ocx:comment`）、`tei:ruby`（ルビは `ocx:r`）、`tei:choice` などです（仕様書 [5.2](ocx-standard.md#52-使用しない-tei-要素と制約)）。
+- **検証には TEI 用の XSD を使います。** `ocx-standard.xsd` の代わりに [ocx-standard-tei.xsd](https://openchj.github.io/schema/ocx/standard/0.6/ocx-standard-tei.xsd) を使います。Schematron は同じものを使えます。
+
+**書誌情報**（題名・著者・底本・ライセンスなど）を記録したい場合は、次のいずれかにします。
+
+- `ocx:comment` に書く（簡単な情報の場合）
+- XML とは別の文書（README など）に書く
+- 文書全体を TEI 文書にして、TEI ヘッダー（`tei:teiHeader`）に書く。この場合、`ocx:doc` は `tei:body` の中に置きます（仕様書 [4.1](ocx-standard.md#41-本文コンテナ-ocxdoc)）
 
 ---
 
