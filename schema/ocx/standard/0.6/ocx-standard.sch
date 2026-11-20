@@ -30,6 +30,12 @@
   <!-- 15.1 文境界 -->
   <sch:pattern id="sentence-boundary">
     <sch:rule context="ocx:doc">
+      <sch:assert test="not(ancestor::ocx:doc)">
+        ocx:doc は入れ子にしてはなりません（4.1）。
+      </sch:assert>
+      <sch:assert test="not(preceding::ocx:doc[@textID = current()/@textID])">
+        同じファイルの中で ocx:doc の textID を重複させてはなりません（4.1）。
+      </sch:assert>
       <sch:assert test=".//tei:s or .//ocx:eos">
         文境界が示されていません。tei:s または ocx:eos で文境界を示します（6, 15.1）。
       </sch:assert>
