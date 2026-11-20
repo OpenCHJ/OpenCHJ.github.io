@@ -98,6 +98,20 @@
     </sch:rule>
   </sch:pattern>
 
+  <!-- 13.2 解析制御の入れ子 -->
+  <sch:pattern id="proc-skip">
+    <sch:rule context="ocx:proc">
+      <sch:assert test="not(ancestor::ocx:skip)">
+        ocx:skip の内部に ocx:proc を置いてはなりません（13.2）。
+      </sch:assert>
+    </sch:rule>
+    <sch:rule context="ocx:skip">
+      <sch:assert test="not(ancestor::ocx:skip)">
+        ocx:skip は入れ子にしてはなりません（13.2）。
+      </sch:assert>
+    </sch:rule>
+  </sch:pattern>
+
   <!-- 10.2 踊り字と濁点の入れ子 -->
   <sch:pattern id="odoriji-vmark">
     <sch:rule context="ocx:odoriji">
