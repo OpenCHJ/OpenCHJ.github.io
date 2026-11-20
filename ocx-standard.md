@@ -523,6 +523,7 @@ OCX Standard は、形態素解析の制御を **2種類の範囲タグ**で表�
 
 - `ocx:proc` の中に `ocx:skip` を置けます。その場合は `ocx:skip` を優先し、`ocx:skip` の範囲には外側の `ocx:proc` の `dic`・`norm` を適用しません。
 - `ocx:skip` の中に `ocx:proc` を置いてはなりません。
+- `ocx:skip` の中に `ocx:skip` がある場合、内側の `ocx:skip` は無視します（タグを取り去り、外側の `ocx:skip` の `tokenize`・`pos` を適用します）。
 
 ```xml
 <ocx:proc dic="Kindai-bungo">文語文<ocx:skip tokenize="single" pos="foreign">English</ocx:skip>文語文</ocx:proc>
@@ -778,7 +779,7 @@ OCX 文書の `tei:*` 部分を TEI のスキーマで検証する場合は、OD
 - `ocx:doc` に、文書が従う版を示す任意属性 `version` を追加しました（[4.1](#41-本文コンテナ-ocxdoc)）。
 - OCX が独自の要素を定める場合を限定し、それ以外の情報（ページ・見出し・会話・詩歌など）は TEI の語彙で表す方針を明記しました（[5.3](#53-ocx-の要素と-tei-の語彙の使い分け)）。
 - 処理系は、本仕様にない要素・属性について何もせず、タグを取り去るだけとすることを定めました（[14.1](#141-解析用テキスト)）。
-- `ocx:proc` の中の `ocx:skip` は `ocx:skip` を優先すること、`ocx:skip` の中に `ocx:proc` を置けないことを定めました（[13.2](#132-ocxskip解析対象外範囲)）。
+- `ocx:proc` の中の `ocx:skip` は `ocx:skip` を優先すること、`ocx:skip` の中に `ocx:proc` を置けないこと、`ocx:skip` の中の `ocx:skip` は無視することを定めました（[13.2](#132-ocxskip解析対象外範囲)）。
 - 原本の一つのファイルに複数の `ocx:doc` を置けることにしました。それぞれを別々の文書として扱い、入れ子は認めません（[4.1](#41-本文コンテナ-ocxdoc)）。
 - `ocx:skip tokenize="space"` の分割に用いる空白は全角スペースであることを明記しました（[13.2](#132-ocxskip解析対象外範囲)）。
 - 「解析対象外」は「形態素解析を行わない」という意味であることを定義しました（[2章](#2-基本原則)、[付録 A](#付録-a-用語)）。
