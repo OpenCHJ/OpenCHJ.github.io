@@ -311,6 +311,7 @@ OCX Standard の文書にすると、次のようになります。
 - [ ] `ocx:corr` は `@orig` を持ち、中身と `@orig` の両方が空ではない
 - [ ] `ocx:wbr` は `ocx:warigaki` の中だけにある
 - [ ] `ocx:proc` の `@dic`, `@norm` と `ocx:skip` の `@tokenize`, `@pos` は、仕様書の制限語彙のいずれか
+- [ ] `ocx:skip` を入れ子にしておらず、`ocx:skip` の中に `ocx:proc` を置いていない
 
 ---
 

@@ -4,6 +4,7 @@
 
      
 ### [更新履歴](history.md)
+- 2026/11/20 　   [OCX Standard](ocx-standard.md) を v0.62β に更新し、[作り方のページ](ocx-standard-guide.md)、検証用スキーマ（XSD・Schematron）、[形態論情報データの形式](ocx-morph.md)（ドラフト）を公開しました。
 - 2026/05/31 　   「虎寛本狂言集」「上代歌謡（仏足石歌・歌経標式例歌）」「青空文庫所収小説等13作品」を追加しました。
 - 2025/12/20 　   OpenCHJ XML文書定義（[OCX-mini](ocx-mini.md), [OCX-standard](ocx-standard)）のドラフトを公開しました。
 - 2025/12/19 　   [整備中の資料・作品](ongoing.md)ページを追加しました。
