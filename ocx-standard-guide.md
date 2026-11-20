@@ -197,7 +197,7 @@ OCX Standard の文書にすると、次のようになります。
 <ocx:skip tokenize="single" pos="uri">https://www.aozora.gr.jp/</ocx:skip>
 ```
 
-`ocx:skip` は `ocx:proc` の中に置けます。その範囲は `ocx:proc` の辞書や正規化の指定に関係なく、形態素解析されません。逆に、`ocx:skip` の中に `ocx:proc` を置くことはできません。
+`ocx:skip` は `ocx:proc` の中に置けます。その範囲は `ocx:proc` の辞書や正規化の指定に関係なく、形態素解析されません。逆に、`ocx:skip` の中に `ocx:proc` や別の `ocx:skip` を置くことはできません。
 
 ---
 
