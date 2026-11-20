@@ -47,6 +47,7 @@
 ## OpenCHJ XML（OCX）文書定義の更新履歴
 
 ### 2026.11
+- [形態論情報データの形式](ocx-morph.md)（ドラフト）を公開
 - OCX Standard: 仕様にない要素・属性は処理せず、タグを取り去るだけとすること、制限語彙にない属性値は既定値で処理することを明記（[14.1](ocx-standard.md#141-解析用テキスト)）
 - OCX Standard: `ocx:proc` の中の `ocx:skip` は `ocx:skip` を優先し、`ocx:skip` の中に `ocx:proc` は置けないこと、`ocx:skip` は入れ子にできないことを明記（[13.2](ocx-standard.md#132-ocxskip解析対象外範囲)）
 - OCX Standard: OCX の要素と TEI の語彙の使い分けの方針を明記（[5.3](ocx-standard.md#53-ocx-の要素と-tei-の語彙の使い分け)）。作り方ページに「OCX の要素で表せない情報が必要になったら」を追加
